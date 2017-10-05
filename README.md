@@ -43,7 +43,7 @@ import smartcity as scity
 #pass the resource_id and the device_type parameters
 superhero = scity.Device("ironman","actuator")
 
-#first bind the resource_id of device we want to subscribe to
+#first bind the resource_id of device we want to subscribe to (here spiderman)
 superhero.bind("spiderman")
 
 #then we can subscribe and listen for incomming data
