@@ -15,9 +15,9 @@
 import smartcity as scity
 
 # pass a resource_id(must be string) and a device_type(sensor,actuator,application[default])
-mydevice=scity.Device("spider_sense","sensor")
+mydevice=scity.Device("spiderman","sensor")
 
-# Prompts for confirmation, etc.
+# Prompts for confirmation if device not already present in local database, etc.
 
 ```
 
@@ -28,10 +28,23 @@ mydevice=scity.Device("spider_sense","sensor")
 import smartcity as scity
 
 #pass the resource_id
-mydevice=scity.Device("spidey_sense")
+mydevice=scity.Device("spiderman")
 
 #pass the data to publish(must be string)
 mydevice.pub("I sense danger, spider senses activated")
 
 ```
  
+##### 3. Subscribing to a device (*spiderman* in this case) from a device of type actuator named *ironman*
+
+```
+import smartcity as scity
+
+#pass the resource_id and the device_type parameters
+superhero = scity.Device("ironman","actuator")
+
+#first **bind** the *resource_id* of device we want to subscribe to
+superhero.bind("spiderman")
+
+#then we can subscribe and listen for incomming data
+superhero.sub()
