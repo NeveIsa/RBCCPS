@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Date: Wed, 04 Oct 2017 08:15:09 GMT
+Content-Type: application/json
+Server: Apache-Coyote/1.1
+Content-Length: 465
+
+{"APIKey":"b1a10d8341fc4fbc891265cee14d5edc","Subscription Queue Name":"iiot_dummy","ResourceID":"iiot_dummy","accessEndPoint":"https:\/\/smartcity.rbccps.org\/api\/0.1.0\/historicData","Registration":"success","publicationEndPoint":"https:\/\/smartcity.rbccps.org\/api\/0.1.0\/publish","resourceAPIInfo":"https:\/\/rbccps-iisc.github.io","AllowedAPIs":"publish,subscribe,historic,cat","subscriptionEndPoint":"https:\/\/smartcity.rbccps.org\/api\/0.1.0\/subscribe"}
