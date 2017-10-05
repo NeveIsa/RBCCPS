@@ -27,7 +27,7 @@ hero=scity.Device("spiderman","sensor")
 
 import smartcity as scity
 
-#pass the resource_id
+#pass the resource_id (and device type if the device is not already created in database)
 hero=scity.Device("spiderman")
 
 #pass the data to publish(must be string)
