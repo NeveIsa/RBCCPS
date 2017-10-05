@@ -7,6 +7,19 @@
 - A device is recognised by a 'resource_id', eg: iiot_light_sensor_101.
 
 
+#### EXAMPLES
 
+##### Create a new Device
+
+```python
+
+import smartcity as scity
+
+# pass a resource_id
+mydevice=scity.Device("my_resource_id")
+
+# Prompts for confirmation, etc.
+
+```
 
  
