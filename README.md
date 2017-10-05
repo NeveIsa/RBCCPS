@@ -7,19 +7,31 @@
 - A device is recognised by a 'resource_id', eg: iiot_light_sensor_101.
 
 
-#### EXAMPLES
-
-##### Create a new Device
+#### Examples
+##### 1. Creating a new Device
 
 ```python
 
 import smartcity as scity
 
-# pass a resource_id
-mydevice=scity.Device("my_resource_id")
+# pass a resource_id(must be string) and a device_type(sensor,actuator,application[default])
+mydevice=scity.Device("spider_sense","sensor")
 
 # Prompts for confirmation, etc.
 
 ```
 
+##### 2. Publishing from a device
+
+```python
+
+import smartcity as scity
+
+#pass the resource_id
+mydevice=scity.Device("spidey_sense")
+
+#pass the data to publish(must be string)
+mydevice.pub("I sense danger, spider senses activated")
+
+```
  
