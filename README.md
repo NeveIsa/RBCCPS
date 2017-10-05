@@ -37,13 +37,13 @@ mydevice.pub("I sense danger, spider senses activated")
  
 ##### 3. Subscribing to a device (*spiderman* in this case) from a device of type actuator named *ironman*
 
-```
+```python
 import smartcity as scity
 
 #pass the resource_id and the device_type parameters
 superhero = scity.Device("ironman","actuator")
 
-#first **bind** the *resource_id* of device we want to subscribe to
+#first bind the resource_id of device we want to subscribe to
 superhero.bind("spiderman")
 
 #then we can subscribe and listen for incomming data
