@@ -15,7 +15,7 @@
 import smartcity as scity
 
 # pass a resource_id(must be string) and a device_type(sensor,actuator,application[default])
-mydevice=scity.Device("spiderman","sensor")
+hero=scity.Device("spiderman","sensor")
 
 # Prompts for confirmation if device not already present in local database, etc.
 
@@ -28,10 +28,10 @@ mydevice=scity.Device("spiderman","sensor")
 import smartcity as scity
 
 #pass the resource_id
-mydevice=scity.Device("spiderman")
+hero=scity.Device("spiderman")
 
 #pass the data to publish(must be string)
-mydevice.pub("I sense danger, spider senses activated")
+hero.pub("I sense danger, spider senses activated")
 
 ```
  
