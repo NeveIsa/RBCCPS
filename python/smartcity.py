@@ -144,7 +144,7 @@ class Device:
     headers={'apikey':self.api_key}
     with requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True) as r:
       print r.iter_lines()
-    
+
   def pub(self,payload):
     """Publish"""
     headers={'apikey':self.api_key}
@@ -187,9 +187,9 @@ if __name__=="__main__":
 
   if arg=="dryrun":
     d=Device("iiot_test0")
-    d.bind("iiot_dummy")
+    #d.bind("iiot_dummy")
     d.pub("hello world")
-    d.sub()
+    #d.sub()
 
   elif arg=="lsdev":
     list_devices()
