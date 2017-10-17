@@ -1,0 +1,6 @@
+HTTP/1.1 200 OK
+Date: Tue, 17 Oct 2017 09:03:15 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 13
+
+bind queue ok
