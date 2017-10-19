@@ -4,7 +4,7 @@ import uuid
 
 
 
-gformurl=open("gformurl.txt").read()
+gformurl=open("gformurl.txt").read().strip()
 import requests
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 gform_doc=requests.get(gformurl,headers=headers).text
@@ -46,4 +46,4 @@ def showCurrentJob():
 #def record(recordID):
 
 
-app.run(port=80)
+app.run(host="0.0.0.0",port=80)
