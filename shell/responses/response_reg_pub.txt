@@ -1,7 +1,7 @@
 HTTP/1.1 200 OK
-Date: Tue, 17 Oct 2017 08:56:53 GMT
+Date: Tue, 17 Oct 2017 09:36:22 GMT
 Content-Type: application/json
 Server: Apache-Coyote/1.1
-Content-Length: 380
+Content-Length: 381
 
-{"APIKey":"b1a7f9f3084b44bea5047a25e782f21a","ResourceID":"iiot_pub","accessEndPoint":https://smartcity.rbccps.org/api/0.1.0/historicData,"Registration":"success","publicationEndPoint":https://smartcity.rbccps.org/api/0.1.0/publish,"resourceAPIInfo":https://rbccps-iisc.github.io,"AllowedAPIs":"publish,cat","subscriptionEndPoint":https://smartcity.rbccps.org/api/0.1.0/subscribe}
+{"APIKey":"a65b52992128498fb07ff3ee3fb4fc30","ResourceID":"iiot_pub2","accessEndPoint":https://smartcity.rbccps.org/api/0.1.0/historicData,"Registration":"success","publicationEndPoint":https://smartcity.rbccps.org/api/0.1.0/publish,"resourceAPIInfo":https://rbccps-iisc.github.io,"AllowedAPIs":"publish,cat","subscriptionEndPoint":https://smartcity.rbccps.org/api/0.1.0/subscribe}

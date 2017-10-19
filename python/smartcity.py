@@ -170,7 +170,7 @@ def list_devices():
     print devices[dev],"\n"
 
 if __name__=="__main__":
-  
+
   supported_args=["dryrun","lsdev"]
 
   import sys
