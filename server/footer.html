@@ -1,0 +1,75 @@
+<script type="text/javascript">
+  //REMOVE GFORMS CLUTTER
+  $(".freebirdFormviewerViewNavigationPasswordWarning").remove();
+
+  $(".quantumWizTextinputPaperinputPlaceholder").remove()
+
+  $(".freebirdFormviewerViewFooterDisclaimer").remove()
+
+  $(".freebirdFormviewerViewFooterImageContainer").remove()
+
+</script>
+
+<script type="text/javascript">
+  function fsubmit()
+  {
+
+    var fdata=$("form").serialize()
+    var url=$("form").attr("action")
+
+    $.post(url,fdata)
+
+
+    setTimeout(function(){window.location="/currentJob"},1000);
+
+
+    
+ 
+
+
+
+    //alert(fdata);
+
+    return false;
+  }
+  $(".quantumWizButtonPaperbuttonLabel").click(fsubmit)
+</script>
+
+<script type="text/javascript">
+  //PREVENT RETURN KEY TO SUBMIT THE FORM
+   $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+</script>
+
+
+<script type="text/javascript">
+  //PREFILL recordID
+
+  recordIDdiv=$(".freebirdFormviewerViewItemsItemItem:contains('recordID')")
+  recordIDinput=recordIDdiv.find("input")
+  recordIDinput.val(recordID)
+  recordIDinput.attr("readonly","readonly")
+
+  recordIDdiv.fadeOut();
+  recordIDdiv.fadeIn();
+  recordIDdiv.css("color","red")
+
+</script>
+
+
+<script type="text/javascript">
+  //CHECK JOB STATUS AND HIDE FORM IF NECESSARY
+
+  //alert(jobStatus)
+  if(jobStatus=="active")
+  {
+    //alert(jobStatus)
+    $("form").hide();
+    $(".freebirdFormviewerViewFormContentWrapper").append("<h1><i>3D printer is already in use, please revisit sometime later...<br></br>Thank you</br></i></h1>")
+  }
+
+</script>
