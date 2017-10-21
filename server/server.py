@@ -9,14 +9,14 @@ import requests
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 gform_doc=requests.get(gformurl,headers=headers).text
 
-#from bs4 import BeautifulSoup
-#soup = BeautifulSoup(gform_doc, 'html.parser')
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(gform_doc, 'html.parser')
 
-#for x in soup.findAll("script"):
-#  x.decompose()
+for x in soup.findAll("script"):
+  x.decompose()
 
 with open("gform.html",'w') as g:
-  g.write(str(gform_doc))
+  g.write(str(soup))
 
 app = Flask(__name__)
 
