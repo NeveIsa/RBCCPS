@@ -9,14 +9,14 @@ import requests
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 gform_doc=requests.get(gformurl,headers=headers).text
 
-from bs4 import BeautifulSoup
-soup = BeautifulSoup(gform_doc, 'html.parser')
+#from bs4 import BeautifulSoup
+#soup = BeautifulSoup(gform_doc, 'html.parser')
 
-for x in soup.findAll("script"):
-  x.decompose()
+#for x in soup.findAll("script"):
+#  x.decompose()
 
 with open("gform.html",'w') as g:
-  g.write(str(soup))
+  g.write(str(gform_doc))
 
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ def index():
 @app.route("/currentJob")
 def showCurrentJob():
   recordID=open("recordID.txt").read()
-  return "<style>body{background-image: url('http://idolza.com/a/f/b/backgrounds-cool-wallpaper-cave-stunning-graphicsheat_cool-designs-wallpaper_grey-paint-for-bedroom-nice-kitchen-colors-bathrooms-design-christmas-light-decorating-ideas-triangle-island-mode.jpg');}</style><h2 style='color:white;'>Current job has started with Job ID: %s </h2>" % recordID
+  return "<style>body{background-color:blue;}</style><h2 style='color:white;'>Current job has started with  recordID: %s </h2>" % recordID
 
 #@app.route("/record")
 #def record(recordID):
