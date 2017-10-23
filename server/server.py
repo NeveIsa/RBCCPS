@@ -39,6 +39,8 @@ def index():
   
 @app.route("/currentJob")
 def showCurrentJob():
+  with open("status.txt",'w') as g:
+  	g.write("intermediate")
   recordID=open("recordID.txt").read()
   return "<style>body{background-color:blue;}</style><h2 style='color:white;'>Current job has started with  recordID: %s </h2>" % recordID
 
