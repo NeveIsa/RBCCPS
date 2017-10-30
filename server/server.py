@@ -1,7 +1,7 @@
 import os
 from flask import Flask,redirect
 import uuid
-
+import requests
 
 
 gformurl=open("gformurl.txt").read().strip()
@@ -44,8 +44,9 @@ def showCurrentJob():
   recordID=open("recordID.txt").read()
   return "<style>body{background-color:blue;}</style><h2 style='color:white;'>Current job has started with  recordID: %s </h2>" % recordID
 
-#@app.route("/record")
-#def record(recordID):
+@app.route("/remotefile")
+def record(remotefile):
+	requests.get()
 
 
 app.run(host="0.0.0.0",port=80)

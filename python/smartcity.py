@@ -61,6 +61,8 @@ def newDevice(resource_id,dev_type):
   with open(__devicesFile,'w') as g:
     g.write(json.dumps(devices))
 
+  return deviceDetails
+
 class User:
   def __init__(self,api_key):
     self.apikey=api_key
@@ -73,7 +75,13 @@ class User:
     headers = {'apikey': self.apikey,'resourceID':resource_id,'serviceType':service_type}
     result=requests.get("https://smartcity.rbccps.org/api/0.1.0/register",headers=headers)
     if result.status_code == requests.codes.ok:
-      response=json.loads(result.text)
+      print "--->","Raw reply for registration from server follows..."
+      print result.text
+      print "<---","Raw reply for registration from server ends..."
+
+      response=json.loads(result.text[:-331]+"}")
+      response["Registration"]="success"
+
       if response['Registration']=="success":
         print "device registered successfully..."
         print response
@@ -105,11 +113,12 @@ class Device:
       print "Create a new device with resource_id '{0}' of type '{1}' ? [Y,n] ".format(resource_id,dev_type),
       ans=raw_input().upper()
       if ans=="Y":
-        newDevice(resource_id,dev_type)
+        deviceDetails=newDevice(resource_id,dev_type)
+        self.api_key=deviceDetails["APIKey"]
       else:
         print "---> Device not created... Exiting..."
         raise Exception
-        
+
     if dev_type=="sensor":
       self.service_type="publish"
     elif dev_type=="actuator":
@@ -142,8 +151,9 @@ class Device:
     """Subscribe"""
     print "---> Subscribing to 'resource_id' - %s" % self.resource_id_to_bind
     headers={'apikey':self.api_key}
-    with requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True) as r:
-      print r.iter_lines()
+    r=requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True)
+    for line in r.iter_lines():
+      print line
 
   def pub(self,payload):
     """Publish"""
@@ -171,7 +181,7 @@ def list_devices():
 
 if __name__=="__main__":
 
-  supported_args=["dryrun","lsdev"]
+  supported_args=["dryrun","lsdev","pub","sub"]
 
   import sys
   try:
@@ -186,10 +196,25 @@ if __name__=="__main__":
     exit()
 
   if arg=="dryrun":
-    d=Device("iiot_test0")
+    temp_res_id=sys.argv[2]
+    d=Device(temp_res_id)
     #d.bind("iiot_dummy")
+    d.bind(temp_res_id)
     d.pub("hello world")
-    #d.sub()
+    d.sub()
+
+  if arg=="pub":
+    res_id=sys.argv[2]
+    data=sys.argv[3]
+    d=Device(res_id)
+    d.pub(data)
+
+  if arg=="sub":
+    res_id_this_device=sys.argv[2]
+    res_id_target_device=sys.argv[3]
+    d=Device(res_id_this_device)
+    d.bind(res_id_target_device)
+    d.sub()
 
   elif arg=="lsdev":
     list_devices()
