@@ -1,8 +1,3 @@
-
-<style>
-body{background:red}
-</style>
-
 ## <p style="color:gray"> IIOT GATEWAY </p>
 
 
