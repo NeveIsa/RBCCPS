@@ -138,10 +138,12 @@ class Device:
     if result.status_code == requests.codes.ok:
       print "---> Binding to %s" % resource_id_to_bind
       print " -",result.text
+      return True
     else:
       print "---> Could not publish data to %s" % resource_id_to_bind
       print " -",result.status_code
       print " -",result.text
+      return False
 
   def unbind(self):
     """Unbind"""
@@ -163,11 +165,12 @@ class Device:
     if result.status_code == requests.codes.ok:
       print "---> Publishing data :",payload
       print " -",result.text
+      return True
     else:
       print "---> Could not publish data"
       print " -",result.status_code
       print " -",result.text
-
+      return False
 
 
 
@@ -178,6 +181,8 @@ def list_devices():
   for dev in devices:
     print "--->",dev
     print devices[dev],"\n"
+
+  return devices
 
 if __name__=="__main__":
 
