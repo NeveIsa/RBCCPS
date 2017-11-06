@@ -23,9 +23,8 @@
 #### B. Architecture
 #### B.1 Layout
 1. The IIOT gateway needs to have the following features -
-  - A generic and easy to use interface to IIOT end devices.
-  - A persistent message queue to retain messages from end devices when connection to Middleware is lost. 
-  
+  - A lightweight interface for IIOT end devices to publish and subscribe messages.
+  - A persistent message queue to retain messages from end devices when connection to Smartcity middleware is lost. 
 
 
 #### B.2 Details
