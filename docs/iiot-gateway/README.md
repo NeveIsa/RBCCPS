@@ -9,8 +9,10 @@
 - *Examples*
 
 #### 1. Architecture
----
+##### Overview
 ![Overview](overview.jpg)
+
+#### Details
 ![Details](details.jpg)
 
 #### 2. Libraries/Tools
