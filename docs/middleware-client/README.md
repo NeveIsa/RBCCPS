@@ -31,7 +31,7 @@ import smartcity as scity
 hero=scity.Device("spiderman")
 
 #pass the data to publish(must be string)
-hero.pub("I sense danger, spider senses activated")
+hero.pub("I sense danger, spider senses activated",[subtopic],[topic])
 
 ```
  

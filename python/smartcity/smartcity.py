@@ -3,9 +3,18 @@ import sys
 import json
 import os
 
+import pkg_resources
 
-__userFile="_user.json"
-__devicesFile="_devices.json"
+
+
+##GLOBALS
+
+GLOBAL_SSL_VERIFY=False
+
+__userFile=pkg_resources.resource_filename(__name__,'_user.json')
+
+__devicesFile=pkg_resources.resource_filename(__name__,'_devices.json')
+
 
 def resID2apiKey(resID):
   if not os.path.exists(__devicesFile):
@@ -73,7 +82,7 @@ class User:
     Params: resource_id,service_type(publish,subscribe,historicData)
     """
     headers = {'apikey': self.apikey,'resourceID':resource_id,'serviceType':service_type}
-    result=requests.get("https://smartcity.rbccps.org/api/0.1.0/register",headers=headers)
+    result=requests.get("https://smartcity.rbccps.org/api/0.1.0/register",headers=headers,verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "--->","Raw reply for registration from server follows..."
       print result.text
@@ -134,7 +143,7 @@ class Device:
     self.resource_id_to_bind=resource_id_to_bind
     headers={'apikey':self.api_key}
     data={"exchange": "amq.topic", "keys": ["%s" % resource_id_to_bind], "queue": "%s" % self.resource_id}
-    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/subscribe/bind",headers=headers,data=json.dumps(data))
+    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/subscribe/bind",headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "---> Binding to %s" % resource_id_to_bind
       print " -",result.text
@@ -153,15 +162,25 @@ class Device:
     """Subscribe"""
     print "---> Subscribing to 'resource_id' - %s" % self.resource_id_to_bind
     headers={'apikey':self.api_key}
-    r=requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True)
+    r=requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True,verify=GLOBAL_SSL_VERIFY)
     for line in r.iter_lines():
       print line
 
-  def pub(self,payload):
+  def pub(self,payload,subtopic=None,topic=None):
     """Publish"""
+
     headers={'apikey':self.api_key}
-    data={"exchange": "amq.topic", "key": "%s" % self.resource_id, "body": "%s" % payload}
-    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/publish",headers=headers,data=json.dumps(data))
+
+    publish_topic = self.resource_id
+
+    if subtopic:
+      publish_topic+="/"+subtopic
+
+    if topic:
+      publish_topic=topic
+
+    data={"exchange": "amq.topic", "key": "%s" % publish_topic, "body": "%s" % payload}
+    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/publish",headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "---> Publishing data :",payload
       print " -",result.text
@@ -210,9 +229,13 @@ if __name__=="__main__":
 
   if arg=="pub":
     res_id=sys.argv[2]
-    data=sys.argv[3]
+    if len(sys.argv)<=4:
+      data=sys.argv[3]
+    else:
+      pub_topic=sys.argv[3]
+      data=sys.argv[4]
     d=Device(res_id)
-    d.pub(data)
+    d.pub(data,topic=pub_topic)
 
   if arg=="sub":
     res_id_this_device=sys.argv[2]
