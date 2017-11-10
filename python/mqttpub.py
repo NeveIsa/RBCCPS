@@ -18,7 +18,7 @@ client.loop_start()
 
 
 def mwpub(data):
-	(rc, mid) = client.publish("mwdata", str(temperature), qos=1)
+	(rc, mid) = client.publish("mwdata", data, qos=1)
 	return (rc,mid)
 
 
