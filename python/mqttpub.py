@@ -4,6 +4,7 @@
 
 import paho.mqtt.client as paho
 import time
+import sys
 
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
@@ -21,8 +22,14 @@ def mwpub(data):
 	return (rc,mid)
 
 
+delay=1
+if len(sys.argv)>1:
+  delay=float(sys.argv[1])
+
+
+
 if __name__=="__main__":
-	
+
 	TEMP_COUNT=0
 	def read_from_imaginary_thermometer():
 		global TEMP_COUNT
@@ -33,4 +40,4 @@ if __name__=="__main__":
 	while True:
 		temperature = read_from_imaginary_thermometer()
 		(rc, mid) = mwpub(str(temperature))
-		time.sleep(1)
+		time.sleep(delay)

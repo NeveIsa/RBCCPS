@@ -10,6 +10,9 @@ import pkg_resources
 ##GLOBALS
 
 GLOBAL_SSL_VERIFY=False
+MIDDLEWARE_SERVER_NAME="https://smartcity.rbccps.org"
+MIDDLEWARE_SERVER_NAME="https://10.156.14.144"
+
 
 if not GLOBAL_SSL_VERIFY:
   requests.packages.urllib3.disable_warnings()
@@ -85,7 +88,7 @@ class User:
     Params: resource_id,service_type(publish,subscribe,historicData)
     """
     headers = {'apikey': self.apikey,'resourceID':resource_id,'serviceType':service_type}
-    result=requests.get("https://smartcity.rbccps.org/api/0.1.0/register",headers=headers,verify=GLOBAL_SSL_VERIFY)
+    result=requests.get("%s/api/0.1.0/register"%MIDDLEWARE_SERVER_NAME,headers=headers,verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "--->","Raw reply for registration from server follows..."
       print result.text
@@ -146,7 +149,7 @@ class Device:
     self.resource_id_to_bind=resource_id_to_bind
     headers={'apikey':self.api_key}
     data={"exchange": "amq.topic", "keys": ["%s" % resource_id_to_bind], "queue": "%s" % self.resource_id}
-    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/subscribe/bind",headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
+    result=requests.post("%s/api/0.1.0/subscribe/bind"%MIDDLEWARE_SERVER_NAME,headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "---> Binding to %s" % resource_id_to_bind
       print " -",result.text
@@ -165,7 +168,7 @@ class Device:
     """Subscribe"""
     print "---> Subscribing to 'resource_id' - %s" % self.resource_id_to_bind
     headers={'apikey':self.api_key}
-    r=requests.get("https://smartcity.rbccps.org/api/0.1.0/subscribe?name=%s" % self.resource_id_to_bind,headers=headers,stream=True,verify=GLOBAL_SSL_VERIFY)
+    r=requests.get("%s/api/0.1.0/subscribe?name=%s" % (MIDDLEWARE_SERVER_NAME,self.resource_id_to_bind),headers=headers,stream=True,verify=GLOBAL_SSL_VERIFY)
     for line in r.iter_lines():
       print line
 
@@ -183,7 +186,7 @@ class Device:
       publish_topic=topic
 
     data={"exchange": "amq.topic", "key": "%s" % publish_topic, "body": "%s" % payload}
-    result=requests.post("https://smartcity.rbccps.org/api/0.1.0/publish",headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
+    result=requests.post("%s/api/0.1.0/publish"%MIDDLEWARE_SERVER_NAME,headers=headers,data=json.dumps(data),verify=GLOBAL_SSL_VERIFY)
     if result.status_code == requests.codes.ok:
       print "---> Publishing data :",payload
       print " -",result.text
