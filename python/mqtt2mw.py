@@ -25,8 +25,9 @@ while True:
 	msg=subscriber.simple("mwdata",qos=1,client_id="mwclient",clean_session=0)
 	mqttpayload=msg.payload
 	print "GOT MQTT--->\n",mqttpayload,"\n"
-	mqttpayload=json.loads(mqttpayload)
-	mwpayload=mqttpayload['payload']
+	#mqttpayload=json.loads(mqttpayload)
+	#mwpayload=mqttpayload['payload']
+	mwpayload=mqttpayload
 	if 'enddevice' in mqttpayload:
 		enddevice=mqttpayload['enddevice']
 
