@@ -11,6 +11,9 @@ import pkg_resources
 
 GLOBAL_SSL_VERIFY=False
 
+if not GLOBAL_SSL_VERIFY:
+  requests.packages.urllib3.disable_warnings()
+
 __userFile=pkg_resources.resource_filename(__name__,'_user.json')
 
 __devicesFile=pkg_resources.resource_filename(__name__,'_devices.json')
