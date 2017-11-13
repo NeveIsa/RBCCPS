@@ -11,7 +11,7 @@ import pkg_resources
 
 GLOBAL_SSL_VERIFY=False
 MIDDLEWARE_SERVER_NAME="https://smartcity.rbccps.org"
-MIDDLEWARE_SERVER_NAME="https://10.156.14.144"
+#MIDDLEWARE_SERVER_NAME="https://10.156.14.144"
 
 
 if not GLOBAL_SSL_VERIFY:
