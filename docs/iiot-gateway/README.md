@@ -35,10 +35,17 @@
    - MQTT stands for Message Queue Telemetry Transport
    - Uses TCP as the transport layer with a lightweight application level binary protocol (Headers are binary instead of ascii text - unlike HTTP) 
    - Provides sessions and message queues using ClientID parameter for messages with QoS > 0.
+   ---
 #### B.2 Details
 ![Details](details.jpg)
+--
+
+#### B.3 Gateway internals
+![Internals](internals.jpg)
+---
 
 #### C. Libraries/Tools
 - [Mosquitto MQTT Broker](https://mosquitto.org/)
 - [paho-mqtt python MQTT Client](https://pypi.python.org/pypi/paho-mqtt/1.1)
 - [Smartcity Middleware Python Client](https://github.com/NeveIsa/RBCCPS/tree/master/docs/middleware-client)
+- [Python multiprocessing.dummy Pool as ThreadPool](https://docs.python.org/2/library/multiprocessing.html**)
