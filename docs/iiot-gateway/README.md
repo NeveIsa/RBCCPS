@@ -22,16 +22,16 @@
 
 #### B. Architecture
 #### B.1 Layout
-** The IIOT gateway needs to have the following features**
+   *The IIOT gateway needs to have the following features*
   - A lightweight interface for IIOT end devices to publish and subscribe messages
   - A persistent message queue to retain messages from end devices when connection to Smartcity middleware is lost. 
  
-** Selection of an interface between gateway and the end devices**
+   *Selection of an interface between gateway and the end devices*
   - Considering the above two, MQTT is a very strong candidate which provides a PUB-SUB architecture and  a message queue out of the box.
   - Mosquitto is an open source MQTT Broker that is supported by Raspberry Pi.
   - paho-mqtt is an open source MQTT Client python library.
   
-  ** Important MQTT related details **
+      *Important MQTT related details*
    - MQTT stands for Message Queue Telemetry Transport
    - Uses TCP as the transport layer with a lightweight application level binary protocol (Headers are binary instead of ascii text - unlike HTTP) 
    - Provides sessions and message queues using ClientID parameter for messages with QoS > 0.
