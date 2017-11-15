@@ -31,7 +31,7 @@
   - Mosquitto is an open source MQTT Broker that is supported by Raspberry Pi.
   - paho-mqtt is an open source MQTT Client python library.
   
-      *Important MQTT related details*
+   *Important MQTT related details*
    - MQTT stands for Message Queue Telemetry Transport
    - Uses TCP as the transport layer with a lightweight application level binary protocol (Headers are binary instead of ascii text - unlike HTTP) 
    - Provides sessions and message queues using ClientID parameter for messages with QoS > 0.
