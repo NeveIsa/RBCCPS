@@ -22,13 +22,13 @@ def mwpub(data):
 	return (rc,mid)
 
 
-delay=1
-if len(sys.argv)>1:
-  delay=float(sys.argv[1])
 
 
 
 if __name__=="__main__":
+	delay=1
+	if len(sys.argv)>1:
+		delay=float(sys.argv[1])
 
 	TEMP_COUNT=0
 	def read_from_imaginary_thermometer():
