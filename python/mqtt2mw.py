@@ -18,7 +18,7 @@ scity_client_device=scity.Device(SMARTCITY_DEVICE_ID);
 
 
 ### CONGESTION CONTROL
-CC_DELAY=3
+CC_DELAY=1 #start slow
 CC_DELAY_STEP_SIZE=0.1
 CC_DELAY_MAX=10
 
