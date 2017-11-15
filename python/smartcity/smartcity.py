@@ -59,7 +59,7 @@ def newDevice(resource_id,dev_type):
 
   with open(__devicesFile) as f:
     devices=json.loads(f.read())
-  
+
   if dev_type=="sensor":
     service_type="publish"
   elif dev_type=="actuator":
@@ -69,7 +69,7 @@ def newDevice(resource_id,dev_type):
   else:
     print "---> 'dev_type' parameter can only accept values publish,subscribe,historicData"
     raise Exception
-  
+
   deviceDetails=user.onboard(resource_id,service_type)
   devices[resource_id]=deviceDetails
 
