@@ -19,6 +19,7 @@ client.loop_start()
 
 def mwpub(data):
 	(rc, mid) = client.publish("mwdata", data, qos=1)
+	print "---> data : %s " % data
 	return (rc,mid)
 
 
