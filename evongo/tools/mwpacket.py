@@ -21,6 +21,7 @@ class datapacket:
       payload['timestamp']=rawdata['timestamp']
     else:
       payload['timestamp']=datetime.datetime.utcnow().isoformat()
+      print("Inserting timestamp - %s" %payload['timestamp'])
 
     payload['data']=rawdata
     payload['deviceid']=self.deviceid
@@ -29,8 +30,11 @@ class datapacket:
 
     return payload
 
+  def gettimestampnow(self):
+    return datetime.datetime.utcnow().isoformat()
 
 if __name__=="__main__":
-  d=datapacket("name","type","unit")
+  d=datapacket("name","type","unit",extract=True)
   print d.getpacket('{"hello":"world"}')
-  print d.getpacket({"hello":"world"})
+  print "\n",d.getpacket({"hello":"world"})
+  print "\n",d.gettimestampnow()
