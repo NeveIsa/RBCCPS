@@ -33,10 +33,11 @@ class datapacket:
         payload['timestamp']=datetime.datetime.utcnow().isoformat()
         print("Inserting timestamp - %s" %payload['timestamp'])
 
-      payload['data']=rawdata
       payload['deviceid']=self.deviceid
       payload['datatype']=self.datatype
       payload['dataunit']=self.dataunit
+      payload['data']=rawdata
+
       payloads.append(payload)
     return payloads
 
