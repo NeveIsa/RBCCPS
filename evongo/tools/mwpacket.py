@@ -10,7 +10,10 @@ class datapacket:
 
   def getpacket(self,rawdata):
     try:
-      rawdata=json.loads(rawdata)
+      if type(rawdata)==dict:
+        pass
+      else:
+        rawdata=json.loads(rawdata)
     except:
       print("Invalid JSON...")
     payload={}
@@ -30,3 +33,4 @@ class datapacket:
 if __name__=="__main__":
   d=datapacket("name","type","unit")
   print d.getpacket('{"hello":"world"}')
+  print d.getpacket({"hello":"world"})
