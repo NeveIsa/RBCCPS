@@ -18,11 +18,15 @@ class datapacket:
       print("Invalid JSON...")
     finally:
       if type(rawdata)==dict:
-        payloads=[rawdata]
+        rawdatas=[rawdata]
       else:
-        payloads=rawdata
+        rawdatas=rawdata
 
-    for payload in payloads:
+    payloads=[]
+
+    for rawdata in rawdatas:
+      payload={}
+
       if self.extract and 'timestamp' in rawdata:
         payload['timestamp']=rawdata['timestamp']
       else:
@@ -33,7 +37,7 @@ class datapacket:
       payload['deviceid']=self.deviceid
       payload['datatype']=self.datatype
       payload['dataunit']=self.dataunit
-
+      payloads.append(payload)
     return payloads
 
   def gettimestampnow(self):
@@ -44,4 +48,8 @@ if __name__=="__main__":
   print d.getpacket('{"hello":"world"}')
   print "\n",d.getpacket({"hello":"world"})
   print "\n",d.getpacket([{"hello":"world"},{"hello2":"world2"}])
+
+  import json
+  print "\nJSON\n",json.dumps(d.getpacket([{"hello":"world"},{"hello2":"world2"}]))
+
   print "\n",d.gettimestampnow()
