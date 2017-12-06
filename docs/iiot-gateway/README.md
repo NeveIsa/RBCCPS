@@ -16,7 +16,7 @@
 - Devices {IIOT gateway devices, IIOT end devices}
 
 #### A.2 Overview
-![Overview](overview.jpg)
+![Overview](IOTGW-OVERVIEW.jpg)
 
 ---
 
@@ -37,11 +37,11 @@
    - Provides sessions and message queues using ClientID parameter for messages with QoS > 0.
    ---
 #### B.2 Details
-![Details](details.jpg)
+![Details](IOTGW-DETAILS.jpg)
 --
 
 #### B.3 Gateway internals
-![Internals](internals.jpg)
+![Internals](IOTGW-INTERNALS.jpg)
 ---
 
 #### C. Libraries/Tools
