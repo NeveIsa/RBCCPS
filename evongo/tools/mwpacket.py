@@ -10,25 +10,31 @@ class datapacket:
 
   def getpacket(self,rawdata):
     try:
-      if type(rawdata)==dict:
+      if type(rawdata)==dict or type(rawdata)==list:
         pass
       else:
         rawdata=json.loads(rawdata)
     except:
       print("Invalid JSON...")
-    payload={}
-    if self.extract and 'timestamp' in rawdata:
-      payload['timestamp']=rawdata['timestamp']
-    else:
-      payload['timestamp']=datetime.datetime.utcnow().isoformat()
-      print("Inserting timestamp - %s" %payload['timestamp'])
+    finally:
+      if type(rawdata)==dict:
+        payloads=[rawdata]
+      else:
+        payloads=rawdata
 
-    payload['data']=rawdata
-    payload['deviceid']=self.deviceid
-    payload['datatype']=self.datatype
-    payload['dataunit']=self.dataunit
+    for payload in payloads:
+      if self.extract and 'timestamp' in rawdata:
+        payload['timestamp']=rawdata['timestamp']
+      else:
+        payload['timestamp']=datetime.datetime.utcnow().isoformat()
+        print("Inserting timestamp - %s" %payload['timestamp'])
 
-    return payload
+      payload['data']=rawdata
+      payload['deviceid']=self.deviceid
+      payload['datatype']=self.datatype
+      payload['dataunit']=self.dataunit
+
+    return payloads
 
   def gettimestampnow(self):
     return datetime.datetime.utcnow().isoformat()
@@ -37,4 +43,5 @@ if __name__=="__main__":
   d=datapacket("name","type","unit",extract=True)
   print d.getpacket('{"hello":"world"}')
   print "\n",d.getpacket({"hello":"world"})
+  print "\n",d.getpacket([{"hello":"world"},{"hello2":"world2"}])
   print "\n",d.gettimestampnow()
