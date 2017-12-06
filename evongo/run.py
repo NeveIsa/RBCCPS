@@ -5,7 +5,7 @@ def before_insert(resource_name, items):
   print "\n",items,"\n"
   for item in items:
     try:
-      item['name']='sampad'
+      #item['name']='sampad'
       item['timestamp']=dateutil.parser.parse(item['timestamp'])
     except:
       print "Exception ---> timestamp field not found"
