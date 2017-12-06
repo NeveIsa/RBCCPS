@@ -19,6 +19,7 @@ client.loop_start()
 
 def mwpub(data):
 	(rc, mid) = client.publish("mwdata", data, qos=1)
+	print "---> data : %s " % data
 	return (rc,mid)
 
 
@@ -39,5 +40,5 @@ if __name__=="__main__":
 
 	while True:
 		temperature = read_from_imaginary_thermometer()
-		(rc, mid) = mwpub(str(temperature))
+		(rc, mid) = mwpub('{"temp":"%s"}' % str(temperature))
 		time.sleep(delay)
