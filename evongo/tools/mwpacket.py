@@ -13,7 +13,7 @@ class datapacket:
       rawdata=json.loads(rawdata)
     except:
       print("Invalid JSON...")
-
+    payload={}
     if self.extract and 'timestamp' in rawdata:
       payload['timestamp']=rawdata['timestamp']
     else:
