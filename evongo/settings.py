@@ -1,4 +1,4 @@
-DOMAIN = {'middlewaredata': {}}
+DOMAIN = {'middlewaredata': {'timestamp':{'type':'datetime'}}}
 
 MONGO_DBNAME  = 'helloworld'
 
