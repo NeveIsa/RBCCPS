@@ -1,6 +1,6 @@
 from smartcity import smartcity as scity
 
-import evangoclient
+import evongoclient
 
 import paho.mqtt.subscribe as subscriber 
 import json,time
@@ -58,8 +58,8 @@ def mwclientthreaded(payload):
 pool=ThreadPool(70)
 
 
-def evangoclientthreaded(payload):
-  evangoclient.evangopub(payload)
+def evongoclientthreaded(payload):
+  evongoclient.evongopub(payload)
 
 
 
@@ -79,7 +79,7 @@ while True:
 		enddevice=mqttpayload['enddevice']
 
 	#pool.apply_async(mwclientthreaded,(mwpayload,))
-	pool.apply_async(evangoclientthreaded,(mwpayload,))
+	pool.apply_async(evongoclientthreaded,(mwpayload,))
 
 	CC_WAIT()
 

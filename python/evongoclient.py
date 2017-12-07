@@ -19,7 +19,7 @@ def patch_send():
 EVONGO_HOST='http://desktop:8000/evongo/middlewaredata'
 
 
-def evangopub(payload):
+def evongopub(payload):
   headers = {'Content-Type': 'application/json',}
 
   try:
@@ -33,10 +33,10 @@ def evangopub(payload):
 
 if __name__=="__main__":
   import sys
-  
+
   #patch_send()
 
   test_data='[{"firstname": "barack", "lastname": "obama3333"}, {"firstname": "mitt", "lastname": "romney"}]'
   data= sys.argv[1] if len(sys.argv)>1 else test_data
   print '\n---> publishing... %s' % data
-  evangopub(data)
+  evongopub(data)
