@@ -16,19 +16,19 @@ def patch_send():
 
 
 
-EVANGO_HOST="http://desktop:8000/evango/middle"
+EVONGO_HOST='http://desktop:8000/evongo/middlewaredata'
 
 
 def evangopub(payload):
   headers = {'Content-Type': 'application/json',}
-  
+
   try:
   	json.loads(payload)
   except Exception as e:
   	print "\n--->PAYLOAD is not a valid JSON"
   	return False
 
-  return requests.post('http://desktop:8000/evongo/middlewaredata', headers=headers, data=payload)
+  return requests.post(EVONGO_HOST, headers=headers, data=payload)
 
 
 if __name__=="__main__":
