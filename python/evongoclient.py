@@ -15,8 +15,11 @@ def patch_send():
 
 
 
+ip=json.loads(open('_mwconf.json').read())['ip']
+EVONGO_HOST='http://{0}:8000/evongo/middlewaredata'.format(ip)
 
-EVONGO_HOST='http://desktop:8000/evongo/middlewaredata'
+#print EVONGO_HOST
+#exit()
 
 
 def evongopub(payload):
