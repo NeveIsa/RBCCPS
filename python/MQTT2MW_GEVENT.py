@@ -1,13 +1,18 @@
+from gevent import monkey
+monkey.patch_all()
+
 from smartcity import smartcity as scity
 
 import evongoclient
 
 import paho.mqtt.subscribe as subscriber 
 import json,time
-from multiprocessing.dummy import Pool as ThreadPool
+#from multiprocessing.dummy import Pool as ThreadPool
+from gevent.pool import Pool as ThreadPool #Note gevent also has a library for native(OS threads,not green threads) thread pools, called gevent.threadpool
 
 import mqttpub
 
+"""
 SMARTCITY_DEVICE_ID="test_SCMWC0"
 
 print "SMARTCITY_DEVICE_ID >",SMARTCITY_DEVICE_ID
@@ -17,7 +22,7 @@ print scity.list_devices()
 
 
 scity_client_device=scity.Device(SMARTCITY_DEVICE_ID);
-
+"""
 
 
 ### CONGESTION CONTROL
