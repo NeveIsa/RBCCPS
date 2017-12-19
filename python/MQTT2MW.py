@@ -1,12 +1,22 @@
-from smartcity import smartcity as scity
+import sys
+if len(sys.argv)>1 and sys.argv[1]=="gevent":
+  from gevent import monkey
+  monkey.patch_all(time=False) #donot patch time as we are using it for our CC_DELAY congestion control
+  from gevent.pool import Pool as ThreadPool
+  print("Using Pool from %s ...\n" % "gevent.pool")
+else:
+  from multiprocessing.dummy import Pool as ThreadPool
+  print("Using Pool from %s ...\n" % "multiprocessing.dummy")
 
+
+from smartcity import smartcity as scity
 import evongoclient
 
 import paho.mqtt.subscribe as subscriber 
 import json,time
-from multiprocessing.dummy import Pool as ThreadPool
 
 import mqttpub
+
 
 """
 SMARTCITY_DEVICE_ID="test_SCMWC0"
@@ -42,7 +52,8 @@ def CC_WAIT():
 
 def mwclientthreaded(payload):
 	try:
-		result=scity_client_device.pub(payload)
+		result=evongoclient.evongopub(payload)
+                #result=scity_client_device.pub(payload)
 		if result:
 			CC_STEP_DELAY(-5) # recover faster
 		else:
@@ -50,18 +61,14 @@ def mwclientthreaded(payload):
 	except:
 		mqttpub.mwpub(payload) #Reinsert message into Broker queue
 		CC_STEP_DELAY(1)
-
+                import os
+                os.system("echo 1 >> log.txt")
 	print "\n-----------------------------------------> Uploaded\n",payload,"\n"
 
 
 
 #Initialize a pool of worker threads
 pool=ThreadPool(70)
-
-
-def evongoclientthreaded(payload):
-  evongoclient.evongopub(payload)
-
 
 
 while True:
@@ -79,8 +86,8 @@ while True:
 	if 'enddevice' in mqttpayload:
 		enddevice=mqttpayload['enddevice']
 
-	#pool.apply_async(mwclientthreaded,(mwpayload,))
-	pool.apply_async(evongoclientthreaded,(mwpayload,))
+	pool.apply_async(mwclientthreaded,(mwpayload,))
+	#pool.apply_async(evongoclientthreaded,(mwpayload,))
 
 	CC_WAIT()
 

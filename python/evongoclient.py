@@ -9,7 +9,7 @@ import httplib
 def patch_send():
     old_send= httplib.HTTPConnection.send
     def new_send( self, data ):
-        print data
+        print (data)
         return old_send(self, data) #return is not necessary, but never hurts, in case the library is changed
     httplib.HTTPConnection.send= new_send
 
@@ -32,9 +32,12 @@ def evongopub(payload):
   except Exception as e:
   	print "\n--->PAYLOAD is not a valid JSON"
   	return False
-
-  return requests.post(EVONGO_HOST, headers=headers, data=payload)
-
+  try:
+    result = requests.post(EVONGO_HOST, headers=headers, data=payload)
+    return result.ok
+  except Exception as e:
+    print("Exception in requests...",e)
+    return False
 
 if __name__=="__main__":
   import sys
@@ -44,4 +47,4 @@ if __name__=="__main__":
   test_data='[{"firstname": "barack", "lastname": "obama3333"}, {"firstname": "mitt", "lastname": "romney"}]'
   data= sys.argv[1] if len(sys.argv)>1 else test_data
   print '\n---> publishing... %s' % data
-  evongopub(data)
+  print evongopub(data)

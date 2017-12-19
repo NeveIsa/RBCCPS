@@ -1,7 +1,7 @@
 
 ## SAMPLE CODE TAKEN FROM
 ## https://www.hivemq.com/blog/mqtt-client-library-paho-python
-
+import datetime
 import paho.mqtt.client as paho
 import time
 import sys
@@ -40,5 +40,5 @@ if __name__=="__main__":
 
 	while True:
 		temperature = read_from_imaginary_thermometer()
-		(rc, mid) = mwpub('{"temp":"%s"}' % str(temperature))
+		(rc, mid) = mwpub('{"timestamp":"%s","deviceid":"test","temperature":"%s"}'%(datetime.datetime.now().isoformat(),temperature))
 		time.sleep(delay)
