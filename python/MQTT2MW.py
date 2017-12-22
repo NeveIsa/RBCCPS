@@ -10,7 +10,8 @@ else:
 
 
 from smartcity import smartcity as scity
-import evongoclient
+#import evongoclient
+import elasticclient
 
 import paho.mqtt.subscribe as subscriber 
 import json,time
@@ -52,7 +53,8 @@ def CC_WAIT():
 
 def mwclientthreaded(payload):
 	try:
-		result=evongoclient.evongopub(payload)
+                result=elasticclient.rpublish(payload)
+		#result=evongoclient.evongopub(payload)
                 #result=scity_client_device.pub(payload)
 		if result:
 			CC_STEP_DELAY(-5) # recover faster
