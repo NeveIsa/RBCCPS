@@ -75,7 +75,7 @@ pool=ThreadPool(70)
 
 while True:
 	try:
-		msg=subscriber.simple("mwdata",qos=1,client_id="mwclient",clean_session=0)
+		msg=subscriber.simple("mwdata",qos=2,client_id="mwclient",clean_session=0)
 	except Exception as e:
 		print "Cannot contact MQTT Broker ---> \n",e
 		exit(-1)

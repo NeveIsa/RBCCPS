@@ -5,6 +5,7 @@ import datetime
 import paho.mqtt.client as paho
 import time
 import sys
+import random
 
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
@@ -35,6 +36,7 @@ if __name__=="__main__":
 	def read_from_imaginary_thermometer():
 		global TEMP_COUNT
 		TEMP_COUNT+=1
+		return int(random.random()*100)
 		return TEMP_COUNT
 
 
