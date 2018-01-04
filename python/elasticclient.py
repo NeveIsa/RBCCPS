@@ -13,7 +13,7 @@ es = Elasticsearch(ES_HOST,maxsize=POOL_SIZE)
 
 
 s=requests.Session()
-def publish(payload,using_requests=False,using_requests_session=False,bulk=False):
+def publish(payload,using_requests=False,using_requests_session=False,bulk=False,debug=False):
   try:
     if not using_requests:
       payload=json.loads(payload)
@@ -24,12 +24,16 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
   if using_requests:
     URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE
     if bulk:
-      URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE+"_bulk"
+      URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE+"/_bulk"
     #print (URL)
     if using_requests_session:
       result=s.post(url=URL,data=payload,headers={"content-type":"application/json"}) 
     else:
       result=requests.post(url=URL,data=payload,headers={"content-type":"application/json"})
+
+    if debug:
+      print "\nSTATUS_CODE:",result.status_code
+      print "RESULT.TEXT:\n",result.text,"\n"
 
     if result.ok:
       return True
@@ -42,11 +46,11 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
   return True
 
 
-def rpublish(payload):
-  return publish(payload,True)
+def rpublish(payload,**kwargs):
+  return publish(payload,True,**kwargs)
 
-def spublish(payload):
-  return publish(payload,True,True)
+def spublish(payload,**kwargs):
+  return publish(payload,True,True,**kwargs)
 
 
 if __name__=="__main__":

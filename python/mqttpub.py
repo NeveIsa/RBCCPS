@@ -6,6 +6,7 @@ import paho.mqtt.client as paho
 import time
 import sys
 import random
+from tools import mwpacket
 
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
@@ -39,8 +40,14 @@ if __name__=="__main__":
 		return int(random.random()*100)
 		return TEMP_COUNT
 
+	d=mwpacket.datapacket("name","type","unit",extract=True)
 
 	while True:
 		temperature = read_from_imaginary_thermometer()
-		(rc, mid) = mwpub('{"timestamp":"%s","deviceid":"test","temperature":"%s"}'%(datetime.datetime.now().isoformat(),temperature))
+                pack=['{"timestamp":"%s","deviceid":"test","temperature":"%s"}'%(datetime.datetime.now().isoformat(),temperature+i) for i in range(5)]
+		packs="["+",".join(pack)+"]"
+                packs = d.getpacket_esbulk(packs)
+		#print packs
+		#continue
+		(rc, mid) = mwpub(packs)
 		time.sleep(delay)

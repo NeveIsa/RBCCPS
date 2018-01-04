@@ -53,19 +53,21 @@ def CC_WAIT():
 
 def mwclientthreaded(payload):
 	try:
-                result=elasticclient.rpublish(payload)
+                result=elasticclient.rpublish(payload,bulk=True,debug=False)
+                
 		#result=evongoclient.evongopub(payload)
                 #result=scity_client_device.pub(payload)
 		if result:
+			print "\n-----------------------------------------> Uploaded\n",payload,"\n"
 			CC_STEP_DELAY(-5) # recover faster
 		else:
-			raise
-	except:
+			raise Exception("elasticclient publish failed")
+	except Exception as e:
+		print "Exception in mwclientthreaded:",e
 		mqttpub.mwpub(payload) #Reinsert message into Broker queue
 		CC_STEP_DELAY(1)
                 import os
                 os.system("echo 1 >> log.txt")
-	print "\n-----------------------------------------> Uploaded\n",payload,"\n"
 
 
 
@@ -85,8 +87,7 @@ while True:
 	#mqttpayload=json.loads(mqttpayload)
 	#mwpayload=mqttpayload['payload']
 	mwpayload=mqttpayload
-	if 'enddevice' in mqttpayload:
-		enddevice=mqttpayload['enddevice']
+	
 
 	pool.apply_async(mwclientthreaded,(mwpayload,))
 	#pool.apply_async(evongoclientthreaded,(mwpayload,))
