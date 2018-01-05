@@ -27,7 +27,7 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
     print("Payload is not a valid JSON... ES Publish Failed")
     return False
 
-  ES_INDEX=ES_INDEX_PREFIX+ES_INDEX_DATE_POSTFIX()
+  ES_INDEX=ES_INDEX_PREFIX+ "-"  +ES_INDEX_DATE_POSTFIX()
   print ES_INDEX
   if using_requests:
     URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE
