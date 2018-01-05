@@ -12,7 +12,7 @@ ES_INDEX_PREFIX="helloworld"
 # do not use prefix as *helloworld is more expensive for elastic than helloworld*
 # Also use YYYY-MM-DD format as helloworld-2018* will give for whole year,
 # helloworld-2018-01* will give for Jan 2018 , etc and is easy and light on elastic than the format DD-MM-YYYY
-ES_INDEX_DATE_POSTFIX=lambda:datetime.datetime.now().strftime("%Y-%m-%d")
+ES_INDEX_DATE_POSTFIX=lambda:datetime.now().strftime("%Y-%m-%d")
 
 DOC_TYPE="middlewaredata"
 es = Elasticsearch(ES_HOST,maxsize=POOL_SIZE)
@@ -28,7 +28,7 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
     return False
 
   ES_INDEX=ES_INDEX_PREFIX+ES_INDEX_DATE_POSTFIX()
-
+  print ES_INDEX
   if using_requests:
     URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE
     if bulk:
