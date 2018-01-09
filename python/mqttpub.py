@@ -43,8 +43,8 @@ if __name__=="__main__":
 	d=mwpacket.datapacket("name","type","unit",extract=True)
 
 	while True:
-		temperature = read_from_imaginary_thermometer()
-                pack=['{"timestamp":"%s","deviceid":"test","temperature":"%s"}'%(datetime.datetime.now().isoformat(),temperature+i) for i in range(5)]
+		temperature = 100 #read_from_imaginary_thermometer()
+                pack=['{"timestamp":"%s","deviceid":"test","temperature":%s}'%(datetime.datetime.now().isoformat(),temperature+i) for i in range(5)]
 		packs="["+",".join(pack)+"]"
                 packs = d.getpacket_esbulk(packs)
 		#print packs
