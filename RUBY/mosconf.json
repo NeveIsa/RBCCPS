@@ -1,0 +1,1 @@
+{ "passwordfile":"/etc/mosquitto/passwd","aclsfile":"/etc/mosquitto/acls"}

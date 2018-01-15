@@ -1,3 +1,6 @@
+
+
+
 require 'ap'
 
 
@@ -125,17 +128,19 @@ class Model
 end
 
 
-model=Model.new()
 
-model.putUser("sam","pad")
-ap model.getUsers
+if __FILE__ == $0
+	model=Model.new()
 
-ap model.getAcls()
+	model.putUser("sam","pad")
+	ap model.getUsers
 
-ap model.putAcls("sam","world","readwrite")
+	ap model.getAcls()
 
-ap model.getAcls()
+	ap model.putAcls("sam","world","readwrite")
 
-model.delAcls("sam","hello")
-ap model.getAcls
+	ap model.getAcls()
 
+	model.delAcls("sam","hello")
+	ap model.getAcls
+end
