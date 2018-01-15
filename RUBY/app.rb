@@ -7,6 +7,9 @@ require 'sinatra'
 conf=File.open("mosconf.json").read
 conf=JSON.parse(conf)
 mosquitto_conf_file=conf["mosquitto_conf_file"]
+basic_auth_user=conf['basic_auth_user']
+basic_auth_pass=conf['basic_auth_pass']
+
 
 puts "========"*7
 puts "MOSQUITTO CONF. FILE: " + mosquitto_conf_file
@@ -41,6 +44,14 @@ puts "==========="*7
 
 
 model=Model.new(passwordfile,aclsfile)
+
+
+
+##BASIC AUTH
+#
+use Rack::Auth::Basic, "Protected Area" do |username, password|
+	  username == basic_auth_user && password == basic_auth_pass
+end
 
 get '/' do
 	content_type :json
