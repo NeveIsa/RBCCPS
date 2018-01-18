@@ -1,6 +1,4 @@
 
-
-
 require 'ap'
 
 
@@ -73,7 +71,7 @@ class Model
 		if not @users.include? username
 			return false
 		end
-		
+
 		if not @acls.has_key? username
 			@acls[username]={}
 		end
@@ -92,15 +90,15 @@ class Model
 	end
 	
 	def dumpAcls
-		@acls.each do |user,key|
-			#ap "#{user} >>> #{key}"
-			File.open(@aclsfile,"w") { |file|
+		#ap "#{user} >>> #{key}"
+		File.open(@aclsfile,"w") { |file|
+			@acls.each do |user,key|
 				file.write("\nuser #{user}\n")
 				key.each do |topic,access|
 					file.write("topic #{access} #{topic}\n")
 				end
-			}
-		end
+			end
+		}
 	end
 
 	############## USER FRIENDLY FUNCTIONS ##############
