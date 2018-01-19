@@ -1,3 +1,12 @@
+"""
+Make sure /etc/elasticsearch/elasticsearch.yml has
+ the repo.path setup matching the _esconfig.json.
+
+Make sure this repo.path directory is owned by both
+ elasticsearch user and group
+
+"""
+
 import requests,json,datetime,time
 import os
 
@@ -72,9 +81,10 @@ class Repo:
         print result.text
 
     def snapshot_yesterday(self,index_prefix):
-        yesterday = datetime.datetime.now() - datetime.timedelta(days=-1)
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
         yesterday=yesterday.strftime("%Y-%m-%d")
         index=index_prefix + "-" + yesterday
+	print "YESTERDAY'S INDEX --> " + index,"\n"
         self.snapshot(index)
 
     def status(self,wait=True): 
@@ -111,7 +121,7 @@ class Repo:
             time.sleep(1)
 
     def check_user(self):
-        user=os.system("whoami")
+        user=os.popen("whoami").read().strip()
         print bcolors.FAIL+"Current user: %s" % user+bcolors.ENDC
         if not user=="root":
             print "Please run this script as {}{}{}".format(bcolors.FAIL,"root",bcolors.ENDC)
@@ -121,6 +131,6 @@ if __name__=="__main__":
     repo.check_user()
     repo.clean(force=True)
     repo.register()
-    repo.snapshot("helloworld-2018-01-05")
+    repo.snapshot_yesterday("helloworld")
     repo.status()
 
