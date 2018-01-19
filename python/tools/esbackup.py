@@ -112,9 +112,9 @@ class Repo:
 
     def check_user(self):
         user=os.system("whoami")
-        print bcolor.FAIL+"Current user: %s" % user+bcolor.ENDC
+        print bcolors.FAIL+"Current user: %s" % user+bcolor.ENDC
         if not user=="root":
-            print "Please run this script as {}{}{}".format(bcolor.FAIL,"root",bcolor.ENDC)
+            print "Please run this script as {}{}{}".format(bcolors.FAIL,"root",bcolors.ENDC)
 
 if __name__=="__main__":
     repo=Repo()
