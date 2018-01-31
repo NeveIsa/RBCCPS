@@ -80,6 +80,21 @@ class Repo:
         result=requests.put(url,data=json.dumps(putdata),headers={"Content-type":"application/json"})
         print result.text
 
+    def restore(self,index):
+        """
+        POST /_snapshot/{{reponame}}/snapshot/_restore
+
+        """
+        url=ES_URL+"/_snapshot/{}/snapshot/_restore".format(self.reponame)
+        result=requests.post(url)
+        if result.ok:
+            print "RESTORE SUCCESSFULL..."
+        else:
+            print "RESTORE FAILED..."
+        print result.text
+
+
+
     def snapshot_yesterday(self,index_prefix):
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
         yesterday=yesterday.strftime("%Y-%m-%d")
