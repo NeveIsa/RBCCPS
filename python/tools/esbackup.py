@@ -8,7 +8,7 @@ Make sure this repo.path directory is owned by both
 """
 
 import requests,json,datetime,time
-import os
+import os,yaml
 
 class bcolors:
     HEADER = '\033[95m'
@@ -25,7 +25,10 @@ ES_CONF=json.loads(open("_esconf.json").read())
 
 ES_HOST=ES_CONF['ip']
 ES_PORT=ES_CONF['port']
-ES_REPOPATH=ES_CONF["repo.path"]
+
+ES_CONF_FILE=yaml.load(open(ES_CONF["configfile"]))
+
+ES_REPOPATH=ES_CONF_FILE["path.repo"][0]
 
 ES_URL="http://{}:{}".format(ES_HOST,ES_PORT)
 

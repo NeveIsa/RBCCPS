@@ -1,1 +1,1 @@
-{"ip":"localhost","port":9200,"repo.path":"/home/richard/esbackup"}
+{"ip":"localhost","port":9200,"configfile":"/etc/elasticsearch/elasticsearch.yml"}
