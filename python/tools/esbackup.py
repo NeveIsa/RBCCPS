@@ -135,7 +135,7 @@ class Repo:
             force=True
 
         print bcolors.WARNING+"WARNING : {} will be WIPED.".format(self.repodir)+bcolors.ENDC
-        cmd="sudo rm {}/*".format(self.repodir)
+        cmd="sudo rm -rf {}/*".format(self.repodir)
         print "execute {}{}{} ? : y/N".format(bcolors.FAIL,cmd,bcolors.ENDC),
         
         if force or raw_input()=='Y':
