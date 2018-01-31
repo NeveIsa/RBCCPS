@@ -1,6 +1,6 @@
 """
 Make sure /etc/elasticsearch/elasticsearch.yml has
- the repo.path setup matching the _esconfig.json.
+ the repo.path setup correctly.
 
 Make sure this repo.path directory is owned by both
  elasticsearch user and group
