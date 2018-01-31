@@ -80,7 +80,7 @@ class Repo:
         result=requests.put(url,data=json.dumps(putdata),headers={"Content-type":"application/json"})
         print result.text
 
-    def restore(self,index):
+    def restore(self):
         """
         POST /_snapshot/{{reponame}}/snapshot/_restore
 
