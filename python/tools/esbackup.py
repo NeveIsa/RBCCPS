@@ -32,6 +32,11 @@ ES_REPOPATH=ES_CONF_FILE["path.repo"][0]
 
 ES_URL="http://{}:{}".format(ES_HOST,ES_PORT)
 
+print "FOUND REPO PATH AS ---> " + ES_REPOPATH
+print bcolors.WARNING + "Is this the intened path?" + bcolors.FAIL + "  !!! Consequences could be severe if wrong path... y/N" + bcolors.ENDC,
+
+if raw_input().upper()!="Y":exit()
+
 
 class Repo:
     def __init__(self,reponame="backup",repodir=ES_REPOPATH):
