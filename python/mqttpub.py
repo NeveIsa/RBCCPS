@@ -44,7 +44,7 @@ if __name__=="__main__":
 
 	while True:
 		temperature = 100 #read_from_imaginary_thermometer()
-                pack=['{"timestamp":"%s","deviceid":"test","temperature":%s}'%(datetime.datetime.now().isoformat(),temperature+i) for i in range(5)]
+                pack=['{"timestamp":"%s","deviceid":"test","temperature":%s}'%(datetime.datetime.utcnow().isoformat(),temperature+i) for i in range(5)]
 		packs="["+",".join(pack)+"]"
                 packs = d.getpacket_esbulk(packs)
 		#print packs
