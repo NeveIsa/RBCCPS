@@ -154,6 +154,10 @@ if __name__=="__main__":
     repo.check_user()
     repo.clean(force=True)
     repo.register()
-    repo.snapshot_yesterday("helloworld")
+    if len(sys.argv)>1:
+        index=sys.argv[1]
+        repo.snapshot(index)
+    else:
+        repo.snapshot_yesterday("helloworld")
     repo.status()
 

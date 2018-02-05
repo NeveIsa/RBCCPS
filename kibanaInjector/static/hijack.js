@@ -3,9 +3,6 @@ if(location.href.indexOf("kibana")!=-1)
 {
 
 
-serverURL="http://localhost:5678"
-
-
 el=$(".global-nav-link").eq(-2)
 
 dbutton=el.clone()
@@ -38,15 +35,9 @@ el.after(dbutton)
 
 function downloader(argument) {
 	if(dbutton.attr("active")==="true")
-	{
-		query=$("pre[data-test-subj='visualizationEsRequestBody']").html()
-		console.log(query);
-		$.post("http://httpbin.org/post",query,(data)=>(alert(data)))
-	}
+	console.log($("pre[data-test-subj='visualizationEsRequestBody']").html())
 	else
-	{
-		console.log("Not on the right page and/or context")
-	}
+		console.log("asdasdsad")
 }
 
 //check if right page and context is found every once in a while
