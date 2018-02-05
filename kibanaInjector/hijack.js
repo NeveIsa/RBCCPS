@@ -41,7 +41,7 @@ function downloader(argument) {
 	{
 		query=$("pre[data-test-subj='visualizationEsRequestBody']").html()
 		console.log(query);
-		$.post("http://httpbin.org/post",query,(data)=>(alert(data)))
+		$.get("http://httpbin.org/get")
 	}
 	else
 	{
