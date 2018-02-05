@@ -1,0 +1,16 @@
+POST /elasticsearch/_msearch HTTP/1.1
+Host: localhost:5601
+Connection: keep-alive
+Content-Length: 783
+Accept: application/json, text/plain, */*
+Origin: http://localhost:5601
+kbn-version: 6.1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/63.0.3239.84 Chrome/63.0.3239.84 Safari/537.36
+content-type: application/x-ndjson
+Referer: http://localhost:5601/app/kibana
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Cookie: grafana_user=admin; grafana_remember=0d794271780a3831dce2826908b52dfd4de0d36bc42bb1419b70460d62e9b9de3f
+
+{"index":["helloworld-*"],"ignore_unavailable":true,"preference":1516507054926}
+{"version":true,"size":500,"sort":[{"timestamp":{"order":"desc","unmapped_type":"boolean"}}],"_source":{"excludes":[]},"aggs":{"2":{"date_histogram":{"field":"timestamp","interval":"30s","time_zone":"Asia/Kolkata","min_doc_count":1}}},"stored_fields":["*"],"script_fields":{},"docvalue_fields":["data.timestamp","timestamp"],"query":{"bool":{"must":[{"match_all":{}},{"match_phrase":{"deviceid":{"query":"loader_vibration"}}},{"range":{"timestamp":{"gte":1516529500056,"lte":1516530400056,"format":"epoch_millis"}}}],"filter":[],"should":[],"must_not":[]}},"highlight":{"pre_tags":["@kibana-highlighted-field@"],"post_tags":["@/kibana-highlighted-field@"],"fields":{"*":{}},"fragment_size":2147483647}}
