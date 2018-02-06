@@ -39,9 +39,14 @@ el.after(dbutton)
 function downloader(argument) {
 	if(dbutton.attr("active")==="true")
 	{
-		query=$("pre[data-test-subj='visualizationEsRequestBody']").html()
-		console.log(query);
-		$.get("http://httpbin.org/get")
+		//query=$("pre[data-test-subj='visualizationEsRequestBody']").html()
+		//console.log(query);
+		fetch(serverURL,
+		{
+		  method: "POST",
+		  body: "hello"
+		}
+		).then(response=>console.log(response));
 	}
 	else
 	{
@@ -68,3 +73,4 @@ setInterval(()=>
 
 }
 
+alert("")
