@@ -23,7 +23,7 @@ post '/:indexPattern' do
   	File.open("queryfile", 'w') { |file| file.write(query) }
 
   	Dir.chdir(Dir.pwd){
-		cmd="tilix -e sh getcsv.sh #{indexPattern}"
+		cmd="xterm -e sh getcsv.sh #{indexPattern}"
 
 		puts cmd
 	  	system(cmd)
