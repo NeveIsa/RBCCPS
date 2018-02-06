@@ -3,6 +3,9 @@ if(location.href.indexOf("kibana")!=-1)
 {
 
 
+serverURL="http://localhost:4567"
+
+
 el=$(".global-nav-link").eq(-2)
 
 dbutton=el.clone()
@@ -35,10 +38,30 @@ el.after(dbutton)
 
 function downloader(argument) {
 	if(dbutton.attr("active")==="true")
-	console.log($("pre[data-test-subj='visualizationEsRequestBody']").html())
+	{
+		query=$("pre[data-test-subj='visualizationEsRequestBody']").html()
+		
+		indexPattern=$("#index_pattern_id").html().trim()
+
+		console.log(indexPattern+"------------->\n\n\n"+query);
+
+		fetch(serverURL +"/"+ indexPattern,
+		{
+		  method: "POST",
+		  body: query
+		}
+		).then(response=>response.text().then((t)=>{
+			//alert(t==query?"successful":"failed")
+			console.log(t==query?"successful":"failed")
+			console.log("POST_RESPONSE ---> \n" + t)
+		}));
+	}
 	else
-		console.log("asdasdsad")
+	{
+		console.log("Not on the right page and/or context")
+	}
 }
+
 
 //check if right page and context is found every once in a while
 setInterval(()=>
@@ -57,5 +80,6 @@ setInterval(()=>
 	},1000
 )
 
-}
 
+
+}

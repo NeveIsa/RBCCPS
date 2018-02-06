@@ -1,4 +1,4 @@
-x="""{
+{
   "version": true,
   "size": 500,
   "sort": [
@@ -16,7 +16,7 @@ x="""{
     "2": {
       "date_histogram": {
         "field": "timestamp",
-        "interval": "1ms",
+        "interval": "12h",
         "time_zone": "Asia/Kolkata",
         "min_doc_count": 1
       }
@@ -38,8 +38,8 @@ x="""{
         {
           "range": {
             "timestamp": {
-              "gte": 1516830761344,
-              "lte": 1516830761345,
+              "gte": 1515324154485,
+              "lte": 1517916154485,
               "format": "epoch_millis"
             }
           }
@@ -63,6 +63,3 @@ x="""{
     "fragment_size": 2147483647
   }
 }
-"""
-
-print x.replace("\n","")

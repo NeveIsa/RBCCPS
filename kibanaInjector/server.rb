@@ -5,11 +5,35 @@ set :public_folder, File.dirname(__FILE__) + '/static'
 
 
 get '/' do
-  'Put this in your pipe & smoke it!'
+	headers "Access-Control-Allow-Origin"=>"*"
+  	"You shouldn't be here, get lost."
 end
 
+post '/:indexPattern' do
+	headers "Access-Control-Allow-Origin"=>"*"
+	
+	query=request.body.read
+  	query=query.split.join
 
-post '/' do
-	puts request.body
+  	indexPattern=params["indexPattern"]
+  	
+  	puts indexPattern
+  	puts query
+
+  	File.open("queryfile", 'w') { |file| file.write(query) }
+
+  	Dir.chdir(Dir.pwd){
+		cmd="tilix -e sh getcsv.sh #{indexPattern}"
+
+		puts cmd
+	  	system(cmd)
+
+	}
+  	
+	request.body.rewind
   	request.body
+
+
+	
+
 end
