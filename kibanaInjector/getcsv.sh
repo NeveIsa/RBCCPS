@@ -14,7 +14,7 @@ echo ---------------------------------------------------------------------
 echo   
 
 #run es2csv 
-../bin/es2csv -i $1 -r -q @queryfile -o static/output.csv
+../bin/es2csv -i $1 -r -q @queryfile -o static/output.csv -u http://$2:9200
 
 echo   
 echo ---------------------------------------------------------------------
@@ -25,5 +25,5 @@ echo
 #wait for user input
 #read xxx
 
-sleep 3
+sleep 7
 

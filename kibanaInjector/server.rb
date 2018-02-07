@@ -3,6 +3,7 @@ require "json"
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
+ESHOST=JSON.parse(File.open("settings.json").read)["ESHOST"]
 
 get '/' do
 	headers "Access-Control-Allow-Origin"=>"*"
@@ -23,11 +24,11 @@ post '/:indexPattern' do
   	File.open("queryfile", 'w') { |file| file.write(query) }
 
   	Dir.chdir(Dir.pwd){
-		cmd="xterm -e sh getcsv.sh #{indexPattern}"
 
+		cmd="xterm -e sh getcsv.sh #{indexPattern} #{ESHOST}"
 		puts cmd
 	  	system(cmd)
-
+	  	
 	}
   	
 	request.body.rewind
