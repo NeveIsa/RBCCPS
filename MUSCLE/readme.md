@@ -14,15 +14,15 @@
 * Go to the link http://localhost:9292 to check everything is working and for the info on how to consume the API
 	
 #### GET	
-* 0	"/users"
-* 1	"/acls"
+* 	"/users"
+* 	"/acls"
 #### POST	
-* 0	"/user/{username}/{password}"
-* 1	"/acl/{username}/{topic}/{access(read/write/readwrite)}"
+* 	"/user/{username}/{password}"
+* 	"/acl/{username}/{topic}/{access(read/write/readwrite)}"
 DELETE	
-* 0	"/user/{username}"
-* 1	"/acls/{username}/{topic}"
+* 	"/user/{username}"
+* 	"/acls/{username}/{topic}"
 #### PUT	
-* 0	"/sighup"
+* 	"/sighup"
 
 
