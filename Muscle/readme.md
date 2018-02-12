@@ -11,8 +11,7 @@
 * Configure the authentication parameters by editing the file `muscleconf.json`
 * Run the server using `ruby app.rb`
 
-* Go to the link http://localhost:9292 to check everything is working and for the info on how to consume the API
-	
+* Go to the link http://{hostname}:9292 (hostname=localhost/machineIP) and enter the credentials to check everything is working and for the info on how to consume the API	
 #### GET	
 * 	"/users"
 * 	"/acls"
