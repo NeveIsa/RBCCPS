@@ -18,7 +18,7 @@
 #### POST	
 * 	"/user/{username}/{password}"
 * 	"/acl/{username}/{topic}/{access(read/write/readwrite)}"
-DELETE	
+#### DELETE	
 * 	"/user/{username}"
 * 	"/acls/{username}/{topic}"
 #### PUT	
