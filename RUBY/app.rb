@@ -4,7 +4,7 @@ require 'json'
 require 'sinatra'
 
 
-conf=File.open("mosconf.json").read
+conf=File.open("muscleconf.json").read
 conf=JSON.parse(conf)
 mosquitto_conf_file=conf["mosquitto_conf_file"]
 basic_auth_user=conf['basic_auth_user']
