@@ -91,8 +91,8 @@ class Repo:
     def restore(self):
         """
         POST /_snapshot/{{reponame}}/snapshot/_restore
-
         """
+
         url=ES_URL+"/_snapshot/{}/snapshot/_restore".format(self.reponame)
         result=requests.post(url)
         if result.ok:
