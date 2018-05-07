@@ -105,9 +105,25 @@ class Repo:
     def check_restore_progress(self,index):
         url=ES_URL + "/_cat/recovery"
         results=requests.get(url)
-        import re
+        import re,time
         sr=re.search(index,results.text)
-        print results.text
+        timeout=10
+        while True:
+            if sr:
+                print "Found indexname {} in restore logs".format(index)
+                break
+            else:
+                print "The restore progress log doesn't contain any trace of the indexname {}".format(index)
+                print "waiting ... {}".format(timeout)
+                time.sleep()
+                timeout-=1
+                if timeout==0:
+                    break
+
+        print re.group(),"----------------"
+        print re.groups()
+
+
         
 
 
