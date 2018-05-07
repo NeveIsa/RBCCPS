@@ -1,15 +1,17 @@
 
 # RESTORING
-#cd ../python/tools
-#sudo sh esrestore.sh
-
+cd ../python/tools
+sudo sh esrestore.sh
+INDEX=`cat tempIndex.txt`
 
 #WAIT AFTER RESTORE
-#sleep 30
+echo ""
+echo "Waiting 30s"
+sleep 30
 
 
-DATE=`date +%Y-%b-%d`
-dest="/mnt/extHD/VINYAS_DATA/$DATE"
+
+dest="/mnt/extHD/VINYAS_DATA/$INDEX"
 
 #if ls succeeds, means folder arleady present, hence exit.
 ls $dest && exit 1
