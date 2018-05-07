@@ -120,8 +120,10 @@ class Repo:
                 if timeout==0:
                     break
 
-        print sr.group(),"----------------"
-        print sr.groups()
+        for line in results.text:
+            lsr=re.search(index,line)
+            if lsr:
+                print line
 
 
         
