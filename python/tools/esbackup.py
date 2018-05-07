@@ -107,8 +107,7 @@ class Repo:
         results=requests.get(url)
         import re
         sr=re.search(index,results.text)
-        if sr:
-            print sr.groups()
+        print results.text
         
 
 
