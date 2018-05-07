@@ -122,8 +122,7 @@ class Repo:
 
         for line in results.text:
             lsr=re.search(index,line)
-            if lsr:
-                print line
+            print line
 
 
         
