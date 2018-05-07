@@ -132,6 +132,7 @@ class Repo:
 		if len(set(tempIndex))==1:
 			index=list(set(tempIndex))[0]
 			print "\nSUCCESSFULLY DETECTED INDEXNAME : {}".format(index)
+			time.sleep(3)
 		else:
 			print "\nMORE THAN ONE SUITABLE CANDIDATES, COULDN'T ARBITRATE.... EXITING"
 			print set(tempIndex)
