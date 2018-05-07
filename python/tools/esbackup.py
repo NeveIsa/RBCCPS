@@ -102,6 +102,16 @@ class Repo:
         print result.text
 
 
+    def check_restore_progress(self,index):
+        url=ES_URL + "/cat/_recovery"
+        results=requests.get(url)
+        import re
+        sr=re.search(index,results.text)
+        if sr:
+            print sr.groups()
+        
+
+
 
     def snapshot_yesterday(self,index_prefix):
         yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
@@ -148,6 +158,7 @@ class Repo:
         print bcolors.FAIL+"Current user: %s" % user+bcolors.ENDC
         if not user=="root":
             print "Please run this script as {}{}{}".format(bcolors.FAIL,"root",bcolors.ENDC)
+
 
 if __name__=="__main__":
     repo=Repo()
