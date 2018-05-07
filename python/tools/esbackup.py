@@ -120,8 +120,8 @@ class Repo:
                 if timeout==0:
                     break
 
-        print re.group(),"----------------"
-        print re.groups()
+        print sr.group(),"----------------"
+        print sr.groups()
 
 
         
