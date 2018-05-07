@@ -110,7 +110,7 @@ class Repo:
 
         while True:
             results=requests.get(url)
-		
+	    		
 	    # If index="", try to auto detect
 	    if index=="":
 		tempIndex=[]
@@ -139,41 +139,43 @@ class Repo:
 			return 1 # 1=error,0=all good
 			
 		
-
+	    # the code below is for when index argument is supplie to function
             sr=re.search(index,results.text)
 
             if sr:
                 print "\nFound indexname {} in restore logs".format(index)
-                break
             else:
                 print "\nThe restore progress log doesn't contain any trace of the indexname {}".format(index)
                 print "waiting ... {}".format(timeout)
                 time.sleep(1)
                 timeout-=1
                 if timeout==0:
-                    break
+                    return 1 # 1=error
 
-	time.sleep(1)
-	lines = results.text.split("\n")
 
-	done=1
 
-        for line in lines:
-	    line=line.strip()
-            lsr=re.search(index,line)
-            if lsr:
-		if re.search("done",line):
-	            print line,"---> DONE"
-		else:
-		    print line, "---> WAITING"
-		    done=0
 
-	if done:
+	    time.sleep(1)
+	    lines = results.text.split("\n")
+
+	    done=1
+
+            for line in lines:
+	        line=line.strip()
+                lsr=re.search(index,line)
+                if lsr:
+		    if re.search("done",line):
+	                print line,"---> DONE"
+		    else:
+		        print line, "---> WAITING"
+		        done=0
+
+	    if done:
 		print "\n---> RESTORE COMPLETED"
 		return 0
-	else:
+	    else:
 		print "\n---> RESTORE IN PROGRESS"
-		return 1
+		#return 1
 		           
 
 
