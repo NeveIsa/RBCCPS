@@ -35,7 +35,7 @@ ES_URL="http://{}:{}".format(ES_HOST,ES_PORT)
 print "FOUND REPO PATH AS ---> " + ES_REPOPATH
 print bcolors.WARNING + "Is this the intened path?" + bcolors.FAIL + "  !!! Consequences could be severe if wrong path... y/N" + bcolors.ENDC,
 
-if raw_input().upper()!="Y":exit()
+#if raw_input().upper()!="Y":exit()
 
 
 class Repo:
