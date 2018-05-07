@@ -102,30 +102,78 @@ class Repo:
         print result.text
 
 
-    def check_restore_progress(self,index):
+    def check_restore_progress(self,index=""):
         url=ES_URL + "/_cat/recovery"
-        results=requests.get(url)
         import re,time
-        sr=re.search(index,results.text)
-        timeout=10
+
+        timeout=20
+
         while True:
+            results=requests.get(url)
+		
+	    # If index="", try to auto detect
+	    if index="":
+		tempIndex=[]
+		print "---> AUTO DETECTING INDEX NAME FOR ANY RESTORE CURRENTLY IN PROGRESS..... HOLD TIGHT"
+		for line in results.text.split("\n"):
+		    line=line.strip()
+		    if "backup" in line and "snapshot" in line and not "done" in line:
+			print line
+			temp=line.split(" ")[0]
+			print "---> DETECTED :",temp
+			tempIndex+=[temp]
+		
+		if len(tempIndex)==0:
+			print "NO MATCH FOUND... WAITING {}s".format(timeout)
+			time.sleep(1)
+			timeout-=1
+			continue # continue while loop
+
+		if len(set(tempIndex))==1:
+			index=list(set(tempIndex))[0]
+			print "SUCCESSFULLY DETECTED INDEXNAME : {}".format(index)
+		else:
+			print "MORE THAN ONE SUITABLE CANDIDATES, COULDN'T ARBITRATE.... EXITING"
+			print set(tempIndex)
+			return 1 # 1=error,0=all good
+			
+		
+
+            sr=re.search(index,results.text)
+
             if sr:
-                print "Found indexname {} in restore logs".format(index)
+                print "\nFound indexname {} in restore logs".format(index)
                 break
             else:
-                print "The restore progress log doesn't contain any trace of the indexname {}".format(index)
+                print "\nThe restore progress log doesn't contain any trace of the indexname {}".format(index)
                 print "waiting ... {}".format(timeout)
-                time.sleep()
+                time.sleep(1)
                 timeout-=1
                 if timeout==0:
                     break
 
-        for line in results.text:
+	time.sleep(1)
+	lines = results.text.split("\n")
+
+	done=1
+
+        for line in lines:
+	    line=line.strip()
             lsr=re.search(index,line)
-            print line
+            if lsr:
+		if re.search("done",line):
+	            print line,"---> DONE"
+		else:
+		    print line, "---> WAITING"
+		    done=0
 
-
-        
+	if done:
+		print "\n---> RESTORE COMPLETED"
+		return 0
+	else:
+		print "\n---> RESTORE IN PROGRESS"
+		return 1
+		           
 
 
 

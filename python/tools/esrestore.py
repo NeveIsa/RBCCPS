@@ -8,5 +8,10 @@ repo.restore()
 
 while True:
   time.sleep(1)
-  repo.check_restore_progress("helloworld-2018-04-03")
+  if repo.check_restore_progress()==0:
+	"\n ---> RESTORE COMPLETED"
+	exit(0)
+  else:
+	pass
+	
 
