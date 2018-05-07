@@ -28,3 +28,6 @@ else
 echo "Failed to create folder."
 fi
 
+
+cd /mnt/extHD/RAW/
+sh dump.sh $INDEX
