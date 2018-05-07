@@ -114,7 +114,7 @@ class Repo:
 	    # If index="", try to auto detect
 	    if index=="":
 		tempIndex=[]
-		print "---> AUTO DETECTING INDEX NAME FOR ANY RESTORE CURRENTLY IN PROGRESS..... HOLD TIGHT"
+		print "\n---> AUTO DETECTING INDEX NAME FOR ANY RESTORE CURRENTLY IN PROGRESS..... HOLD TIGHT"
 		for line in results.text.split("\n"):
 		    line=line.strip()
 		    if "backup" in line and "snapshot" in line and not "done" in line:
@@ -124,16 +124,16 @@ class Repo:
 			tempIndex+=[temp]
 		
 		if len(tempIndex)==0:
-			print "NO MATCH FOUND... WAITING {}s".format(timeout)
+			print "\nNO MATCH FOUND... WAITING {}s".format(timeout)
 			time.sleep(1)
 			timeout-=1
 			continue # continue while loop
 
 		if len(set(tempIndex))==1:
 			index=list(set(tempIndex))[0]
-			print "SUCCESSFULLY DETECTED INDEXNAME : {}".format(index)
+			print "\nSUCCESSFULLY DETECTED INDEXNAME : {}".format(index)
 		else:
-			print "MORE THAN ONE SUITABLE CANDIDATES, COULDN'T ARBITRATE.... EXITING"
+			print "\nMORE THAN ONE SUITABLE CANDIDATES, COULDN'T ARBITRATE.... EXITING"
 			print set(tempIndex)
 			return 1 # 1=error,0=all good
 			
