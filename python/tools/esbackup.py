@@ -132,6 +132,8 @@ class Repo:
 		if len(set(tempIndex))==1:
 			index=list(set(tempIndex))[0]
 			print "\nSUCCESSFULLY DETECTED INDEXNAME : {}".format(index)
+                        with open("tempIndex.txt",'w') as g:
+                            g.write(index)
 			time.sleep(3)
 		else:
 			print "\nMORE THAN ONE SUITABLE CANDIDATES, COULDN'T ARBITRATE.... EXITING"
