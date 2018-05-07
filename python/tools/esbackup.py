@@ -103,7 +103,7 @@ class Repo:
 
 
     def check_restore_progress(self,index):
-        url=ES_URL + "/cat/_recovery"
+        url=ES_URL + "/_cat/recovery"
         results=requests.get(url)
         import re
         sr=re.search(index,results.text)
