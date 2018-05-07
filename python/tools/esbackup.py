@@ -112,7 +112,7 @@ class Repo:
             results=requests.get(url)
 		
 	    # If index="", try to auto detect
-	    if index="":
+	    if index=="":
 		tempIndex=[]
 		print "---> AUTO DETECTING INDEX NAME FOR ANY RESTORE CURRENTLY IN PROGRESS..... HOLD TIGHT"
 		for line in results.text.split("\n"):
