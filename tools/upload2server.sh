@@ -1,3 +1,9 @@
+
+. yesterdayIndex.sh
+
+cd ../python/tools
+python esbackup.py $LASTINDEX 
+
 echo "ls"
 ssh root@smartcity.rbccps.org -p 5151 ls /esbackup
 echo "rm"
@@ -23,3 +29,11 @@ do
 		sleep 10
 	fi
 done
+
+
+echo ""
+echo "CALLING SERVER AUTOMATION... in 10s"
+sleep 10
+
+ssh root@smartcity.rbccps.org -p 5151 sh /home/richard/Desktop/rbc/RBCCPS/tools/serverAutomation.sh
+
