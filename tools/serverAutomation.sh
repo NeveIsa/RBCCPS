@@ -31,3 +31,13 @@ fi
 
 cd /mnt/extHD/RAW/
 sh dump.sh $INDEX
+
+echo ""
+echo "Completed dowloading RAW DATA"
+sleep 10
+
+
+echo ""
+echo "STARTING SEGREGATION..."
+
+sh fragmentation.sh $INDEX

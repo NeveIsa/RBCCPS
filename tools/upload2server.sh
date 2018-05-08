@@ -7,8 +7,14 @@ ssh root@smartcity.rbccps.org -p 5151 rm -rf /esbackup
 #ssh root@smartcity.rbccps.org -p 5151 mkdir /esbackup
 
 echo "ls"
-ssh root@smartcity.rbccps.org -p 5151 ls esback*/ -R
+ssh root@smartcity.rbccps.org -p 5151 ls esbackup/ -R
 
-
-rsync -arvz -e 'ssh -p 5151' --progress /home/richard/esbackup root@smartcity.rbccps.org:/
-
+while true
+do
+	rsync -arvz -e 'ssh -p 5151' --progress /home/richard/esbackup root@smartcity.rbccps.org:/
+	
+	if [ $? -eq 0]
+	then
+		break
+	fi
+done
