@@ -3,8 +3,8 @@ index=$1
 cd /mnt/extHD/RAW_SEGREGATED/
 
 
-ls $index && mkdir $index
-if [ $? -ne 0]
+mkdir $index
+if [ $? -ne 0 ]
 then
 echo "Folder exists already..."
 exit 1
