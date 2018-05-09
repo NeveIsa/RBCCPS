@@ -35,5 +35,5 @@ echo ""
 echo "CALLING SERVER AUTOMATION... in 10s"
 sleep 10
 
-ssh root@smartcity.rbccps.org -p 5151 sh /home/richard/Desktop/rbc/RBCCPS/tools/serverAutomation.sh
+ssh root@smartcity.rbccps.org -p 5151 screen -dmS serverAutomation /home/richard/Desktop/rbc/RBCCPS/tools/serverAutomation.sh
 
