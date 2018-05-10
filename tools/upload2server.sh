@@ -1,5 +1,9 @@
 
-. yesterdayIndex.sh
+#. yesterdayIndex.sh
+
+LASTINDEX=$(date -d "-1 day" +"helloworld-%Y-%m-%d")
+echo "YESTERDAY'S INDEX : $LASTINDEX"
+
 
 cd ../python/tools
 python esbackup.py $LASTINDEX 
