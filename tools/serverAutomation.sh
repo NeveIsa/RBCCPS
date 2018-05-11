@@ -1,6 +1,8 @@
 
 # RESTORING
-cd ../python/tools
+thisDir=$(dirname "$0")
+
+cd "$thisDir/../python/tools"
 sudo sh esrestore.sh
 INDEX=`cat tempIndex.txt`
 

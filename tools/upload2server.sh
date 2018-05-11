@@ -24,7 +24,7 @@ do
 	echo ""
 	rsync -arvz -e 'ssh -p 5151' --progress /home/richard/esbackup root@smartcity.rbccps.org:/
 	
-	if [ $? -eq 0]
+	if [ $? -eq 0 ]
 	then
 		echo "SUCCESSFULLY UPLOADED..."
 		break
