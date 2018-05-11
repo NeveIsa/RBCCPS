@@ -6,6 +6,9 @@ cd "$thisDir/../python/tools"
 sudo sh esrestore.sh
 INDEX=`cat tempIndex.txt`
 
+echo ""
+echo "FOUND INDEX.......... $INDEX"
+
 #WAIT AFTER RESTORE
 echo ""
 echo "Waiting 30s"
