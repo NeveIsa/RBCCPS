@@ -129,6 +129,8 @@ class Repo:
 			print "\nNO MATCH FOUND... WAITING {}s".format(timeout)
 			time.sleep(1)
 			timeout-=1
+			if timeout==0:
+				return 1
 			continue # continue while loop
 
 		if len(set(tempIndex))==1:
