@@ -1,6 +1,6 @@
 
 # RESTORING
-thisDir=$(dirname "$0")
+thisDir=$(dirname $(realpath "$0"))
 
 cd "$thisDir/../python/tools"
 sudo sh esrestore.sh
@@ -42,7 +42,12 @@ echo "Completed dowloading RAW DATA"
 sleep 10
 
 
+
+echo ""
+echo "CDing into $thisDir"
+cd $thisDir
+sleep 2
+
 echo ""
 echo "STARTING SEGREGATION..."
-
 sh fragmentation.sh $INDEX
