@@ -29,6 +29,8 @@ if [ $? -eq 0 ]
 then
  echo "Created.."
  rsync -arv /esbackup $dest
+ rsync -arv /esbackup $dest
+ rsync -arv /esbackup $dest
 else
 echo "Failed to create folder."
 fi
