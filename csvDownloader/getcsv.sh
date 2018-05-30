@@ -1,4 +1,10 @@
-server=10.156.14.143
+#server=10.156.14.143
+server=`sh findIP.sh`
+
+echo ""
+echo "FOUND IP: $server"
+sleep 3
+echo ""
 
 
 curl $server/dataLNK/ > .temp
