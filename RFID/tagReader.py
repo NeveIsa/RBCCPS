@@ -1,8 +1,13 @@
 import mercury
-import sys
+import sys,time,datetime
 
-printnl=lambda x:sys.stdout.write(x)
-defaultCB=lambda x:sys.stdout.write("DEFAULT CB: " + repr(x))
+def printnl(x):
+    sys.stdout.write(x)
+    sys.stdout.flush()
+
+def defaultCB(x):
+    sys.stdout.write("DEFAULT CB: %s \n" %  repr(x))
+    sys.stdout.flush()
 
 class isaRFID:
     def __init__(self,port):
@@ -35,12 +40,16 @@ class isaRFID:
                     printnl("DEBUG: ")
                     print(tags)
                 if len(tags):
-                    printnl("Detected: ")
-                    print(tags)
+                    #printnl("Detected: ")
+                    #print(tags)
+                    cb(tags)
             except Exception as e:
                 printnl("EXCEPTION: ")
                 print(e)
                 
+    def asyncRead(self,cb=defaultCB):
+        self.reader.start_reading(callback=cb)
+
 
 
 if __name__=="__main__":
@@ -52,17 +61,32 @@ if __name__=="__main__":
         global RFIDreader
         RFIDreader=isaRFID("/dev/ttyUSB0")
         RFIDreader.test()
-        RFIDreader.setup(power=700)
+        RFIDreader.setup(power=1500)
 
     def destroyReader():
         global RFIDreader
         del RFIDreader
 
+
+    def mycb(tag):
+        ts=datetime.datetime.utcnow().isoformat()
+        for tag in [tag]:
+            print ("---"*20)
+            print ("TIMESTAMP:         ",ts)
+            print ("EPC:               ",tag)
+            print ("ANTENNA:           ",tag.antenna)
+            print ("READ COUNT:        ",tag.read_count)
+            print ("RSSI:              ",tag.rssi)
+            print ("---"*20)
+            print ("\n")
+
+
     setupReader()
 
     while True:
         try:
-            RFIDreader.startReading()
+            RFIDreader.asyncRead(mycb)
+            while True:time.sleep(1)
         except Exception as e:
             printnl("FATAL: ")
             print(e)
