@@ -1,3 +1,7 @@
+#MOVING
+echo ""
+echo "moving from /esbackup to /home/richard/esbackup"
+mv /esbackup/* /home/richard/esbackup
 
 # RESTORING
 thisDir=$(dirname $(realpath "$0"))
