@@ -1,1 +1,1 @@
-{"ip":"localhost"}
+{"ip":"localhost","es_index_prefix":"test","pool_size":100,"test_NREQ":1000}

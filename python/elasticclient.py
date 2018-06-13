@@ -1,19 +1,21 @@
 import json,requests
 from datetime import datetime
 from elasticsearch import Elasticsearch
-
+import sys 
 
 #GLOBALS
-ES_HOST="{}:9200".format(json.loads(open("_mwconf.json").read())["ip"])
+_CONF=json.loads(open("_mwconf.json").read())
+ES_HOST="{}:9200".format(_CONF["ip"])
 
-POOL_SIZE=100
-ES_INDEX_PREFIX="helloworld"
+POOL_SIZE=_CONF["pool_size"]
+ES_INDEX_PREFIX=_CONF["es_index_prefix"]
 
 # do not use prefix as *helloworld is more expensive for elastic than helloworld*
 # Also use YYYY-MM-DD format as helloworld-2018* will give for whole year,
 # helloworld-2018-01* will give for Jan 2018 , etc and is easy and light on elastic than the format DD-MM-YYYY
-ES_INDEX_DATE_POSTFIX=lambda:datetime.now().strftime("%Y-%m-%d")
 
+#ES_INDEX_DATE_POSTFIX=lambda:datetime.now().strftime("%Y-%m-%d")
+ES_INDEX_DATE_POSTFIX=lambda :"test"
 DOC_TYPE="middlewaredata"
 es = Elasticsearch(ES_HOST,maxsize=POOL_SIZE)
 
@@ -28,7 +30,11 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
     return False
 
   ES_INDEX=ES_INDEX_PREFIX+ "-"  +ES_INDEX_DATE_POSTFIX()
-  print ES_INDEX
+
+  print ES_INDEX,datetime.utcnow(),
+  sys.stdout.write("\r")
+  sys.stdout.flush()
+  
   if using_requests:
     URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE
     if bulk:
@@ -42,7 +48,8 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
     if debug:
       print "\nSTATUS_CODE:",result.status_code
       print "RESULT.TEXT:\n",result.text,"\n"
-
+      
+    
     if result.ok:
       return True
     else:
@@ -68,19 +75,25 @@ if __name__=="__main__":
 
   pool=ThreadPool(POOL_SIZE)
 
-  N_REQ=1000
+  N_REQ=_CONF["test_NREQ"]
   print "Making",N_REQ,"requests using various methods to post to elasticsearch DB...\n"
 
 
   start=time.time()
   for _ in range(N_REQ):
     publish('{"hello":"world"}')
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
   print "Using elasticsearch (FOR LOOP) library\n(Fails using monkey_patch, more work needed to figure out why)\n",time.time()-start,"\n"
 
 
   start=time.time()
   for _ in range(N_REQ):
     rpublish('{"hello":"world"}')
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
   print "Using requests (FOR LOOP)\n",time.time()-start,"\n"
 
 
@@ -88,7 +101,10 @@ if __name__=="__main__":
   for _ in range(N_REQ):
     gevent.spawn(rpublish,'{"hello":"world"}')
   gevent.wait()
-  print "Using request (GEVENT) without monkey patching\n",time.time()-start,"\n"
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
+  print "Using request (GEVENT) without monkey patching [gevent.spawn each loop] \n",time.time()-start,"\n"
 
 
   print "Monkey patching...",
@@ -99,13 +115,19 @@ if __name__=="__main__":
   for _ in range(N_REQ):
     gevent.spawn(rpublish,'{"hello":"world"}')
   gevent.wait()
-  print "Using request (GEVENT) with monkey patching\n",time.time()-start,"\n"
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
+  print "Using request (GEVENT) with monkey patching [gevent.spawn each loop] \n",time.time()-start,"\n"
 
 
   start=time.time()
   for _ in range(N_REQ):
     pool.apply_async(rpublish,('{"hello":"world"}',))
   pool.join()
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
   print "Using request (GEVENT) with monkey patching with %s greenthreads using  gevent.pool\n" % POOL_SIZE,time.time()-start,"\n"
 
 
