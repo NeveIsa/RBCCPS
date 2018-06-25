@@ -2,6 +2,7 @@ name: lightSensor
 location: RBCCPS
 pollingRate: 100
 modbusID: 99
+state: Active
 
 readRegs:
         - addr: 4000
