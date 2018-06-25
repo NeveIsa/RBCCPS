@@ -1,0 +1,59 @@
+name: 
+     type: string
+
+location:
+        type: string
+        required: False
+
+modbusDevID:
+        type: integer
+        min: 2
+        max: 247
+
+state:
+        type: string
+        allowed:
+                - active
+                - inactive
+                - dormant
+
+readRegs:
+        type: list
+        schema: 
+                type: dict
+                schema:
+                        addr: 
+                                type: integer
+                                max: 65535
+                                min: 0
+                        nRegs:
+                                type: integer 
+                                max: 100
+                                min: 1
+                        unit:
+                                type: string
+                        rate:
+                                type: float
+                                max: 500
+                                min: 0.001
+
+                        mqttTopic:
+                                type: string
+                                 
+
+writeRegs:
+        type: list
+        schema:
+                type: dict
+                schema:
+                        addr: 
+                                type: integer
+                                max: 65535
+                                min: 0
+                        mqttTopic:
+                                type: string
+
+
+
+
+

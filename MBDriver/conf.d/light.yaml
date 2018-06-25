@@ -1,7 +1,7 @@
 name: lightSensor
 location: RBCCPS
 modbusDevID: 99
-state: active
+state: inactive
 
 readRegs:
         - addr: 4000
@@ -18,5 +18,5 @@ readRegs:
 
 writeRegs:
         - addr: 8000
-        - mqttTopic: /hello/world
+          mqttTopic: /hello/world
 
