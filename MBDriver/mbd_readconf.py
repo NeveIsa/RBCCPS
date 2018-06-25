@@ -5,18 +5,19 @@ import os
 import time
 import datetime
 import json
+import yaml
 
-CONFIG_DIR = "/home/raghu/Desktop/configFiles"
+CONFIG_DIR = "conf.d"
 LAST_SCANNED = 0
 MODBUS_CONFIG = {}
-MAX_NO_POLLS = 500 # @115200 its ~750
+MAX_NO_POLLS = 500 # @115200 freq. is ~750
 
 def findConfFiles(_dir):
     global CONFIG_DIR, LAST_SCANNED
     if os.path.exists(_dir) :
         #print("Config files' path found.")
         confFiles=os.listdir(_dir)
-        confFiles=filter(lambda x:x.endswith(".conf"),confFiles)
+        confFiles=filter(lambda x:x.endswith(".yaml"),confFiles)
         confFiles=list(confFiles)
         #print (confFiles)
         return confFiles

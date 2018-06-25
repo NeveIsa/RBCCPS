@@ -1,0 +1,20 @@
+name: lightSensor
+location: RBCCPS
+pollingRate: 100
+modbusID: 99
+
+readRegs:
+        - addr: 4000
+          nRegs: 4
+          unit: Volts
+          mqttTopic: /hello/light/voltage
+        
+        - addr: 5000
+          nRegs: 5
+          unit: Amps
+          mqttTopic: /hello/light/current
+
+writeRegs:
+        - addr: 8000
+        - mqttTopic: /hello/world
+
