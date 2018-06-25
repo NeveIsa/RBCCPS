@@ -1,18 +1,19 @@
 name: lightSensor
 location: RBCCPS
-pollingRate: 100
-modbusID: 99
-state: Active
+modbusDevID: 99
+state: active
 
 readRegs:
         - addr: 4000
           nRegs: 4
           unit: Volts
+          rate: 100
           mqttTopic: /hello/light/voltage
-        
+
         - addr: 5000
           nRegs: 5
           unit: Amps
+          rate: 100
           mqttTopic: /hello/light/current
 
 writeRegs:
