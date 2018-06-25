@@ -71,6 +71,7 @@ def spublish(payload,**kwargs):
 if __name__=="__main__":
   import gevent,time,requests
   from gevent import monkey
+  
   from gevent.pool import Pool as ThreadPool
 
   pool=ThreadPool(POOL_SIZE)
@@ -114,7 +115,7 @@ if __name__=="__main__":
   start=time.time()
   for _ in range(N_REQ):
     gevent.spawn(rpublish,'{"hello":"world"}')
-  gevent.wait()
+  gevent.wait(count=N_REQ)
   sys.stdout.write(" "*80)
   sys.stdout.write("\r")
   sys.stdout.flush()
@@ -130,5 +131,20 @@ if __name__=="__main__":
   sys.stdout.flush()
   print "Using request (GEVENT) with monkey patching with %s greenthreads using  gevent.pool\n" % POOL_SIZE,time.time()-start,"\n"
 
+
+
+  from multiprocessing.dummy import Pool as systemTPool
+  stpool=systemTPool(POOL_SIZE)
+
+
+  start=time.time()
+  for _ in range(N_REQ):
+    stpool.apply_async(rpublish,('{"hello":"world"}',))
+  stpool.close()
+  stpool.join()
+  sys.stdout.write(" "*80)
+  sys.stdout.write("\r")
+  sys.stdout.flush()
+  print "Using request (SYSTEM T POOL) with %s threads using  multiprocessing.dummy.Pool\n" % POOL_SIZE,time.time()-start,"\n"
 
 
