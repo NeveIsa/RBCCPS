@@ -9,7 +9,7 @@ import pkg_resources
 
 ##GLOBALS
 
-GLOBAL_SSL_VERIFY=False
+GLOBAL_SSL_VERIFY=True
 MIDDLEWARE_SERVER_NAME="https://smartcity.rbccps.org"
 #MIDDLEWARE_SERVER_NAME="https://10.156.14.144"
 
