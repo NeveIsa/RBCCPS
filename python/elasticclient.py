@@ -5,7 +5,7 @@ import sys
 
 #GLOBALS
 _CONF=json.loads(open("_mwconf.json").read())
-ES_HOST="{}:9200".format(_CONF["ip"])
+ES_HOST="{}:{}".format(_CONF["ip"],_CONF["port"])
 
 POOL_SIZE=_CONF["pool_size"]
 ES_INDEX_PREFIX=_CONF["es_index_prefix"]
