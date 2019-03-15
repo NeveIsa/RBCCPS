@@ -46,7 +46,7 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
     if using_requests_session:
         result=s.post(url=URL,data=payload,headers={"content-type":"application/json","Host":""}) 
     else:
-      result=requests.post(url=URL,data=payload,headers={"content-type":"application/json"})
+        result=requests.post(url=URL,data=payload,headers={"content-type":"application/json","Host":""})
 
     if debug:
       print "\nSTATUS_CODE:",result.status_code
