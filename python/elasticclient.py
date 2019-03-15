@@ -44,7 +44,7 @@ def publish(payload,using_requests=False,using_requests_session=False,bulk=False
       URL="http://"+ES_HOST+"/"+ES_INDEX+"/"+DOC_TYPE+"/_bulk"
     #print (URL)
     if using_requests_session:
-      result=s.post(url=URL,data=payload,headers={"content-type":"application/json"}) 
+        result=s.post(url=URL,data=payload,headers={"content-type":"application/json","Host":""}) 
     else:
       result=requests.post(url=URL,data=payload,headers={"content-type":"application/json"})
 
