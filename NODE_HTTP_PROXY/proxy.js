@@ -15,7 +15,7 @@ const YAML= require('yaml')
 //   
 const conf = fs.readFileSync('./conf.yml', 'utf8')
 CONF=YAML.parse(conf)
-console.log("-----".repeat(10),"Configuration:\n",conf,"\n","-----".repeat(10))
+console.log("-----".repeat(10),"\nConfiguration:\n",conf,"\n","-----".repeat(10))
 
 
 var HITS=0;
