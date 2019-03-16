@@ -19,6 +19,7 @@ console.log("-----".repeat(10),"\nConfiguration:\n",conf,"\n","-----".repeat(10)
 
 
 var HITS=0;
+var ERRORS=0;
 
 mqtt = require("mqtt");
 var mqttclient  = mqtt.connect('mqtt://localhost')
@@ -85,6 +86,8 @@ function log_status()
 				console.log(key + " : " + STATS[key] + " | "  + STATS_LAST_UPDATE[key]);
 			}
 
+		console.log("Errors: ", ERRORS);
+
 }
 
 ////////////////////////////////////////////////////////////
@@ -113,6 +116,7 @@ function OPR(proxyReq, req, res) {
         if (err) 
 	    {
 		console.error(err)
+		    ERRORS++;
 		return;
 	    }
         //console.log(body)
