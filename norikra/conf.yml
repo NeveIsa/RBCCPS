@@ -1,0 +1,5 @@
+norikraHost: localhost
+norikraPort: 26578
+
+mqttTopic: mwdata
+
