@@ -1,5 +1,6 @@
 norikraHost: localhost
-norikraPort: 26578
+norikraHTTPPort: 26578
+norikraRPCPort: 26571
 
 mqttTopic: mwdata
 
