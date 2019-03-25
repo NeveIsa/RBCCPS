@@ -37,7 +37,7 @@ def post target,data
 		puts "Target: %s | However empty data: %s" % [target,data.to_s]
 		return 700,""
 	end
-	print "---> Posting -> %s | status: " % target
+	print "\n---> Posting -> %s | status: " % target
 	conn = Faraday.new(:url => API_URL)
 	result=conn.post do |req|
 		req.headers['Content-Type'] = 'application/json'
@@ -105,12 +105,12 @@ def post_buffer
 
 			now = Time.now.getutc # Time.now will also work, the subration is carried out ony after converting both timstamps into UTC
 			delta = now - oldest_entry_utc
-			print "\r"," "*20,"\r"
+			print "\r"," "*12,"\r"
 			print delta
 			if delta > TIME_DELTA_THRESHOLD 
-				puts	
-				Thread.new(BUFFER[device]) { |data| 
-					status,body=post device,data
+				#puts	
+				Thread.new(device,BUFFER[device]) { |dev,data| 
+					status,body=post dev,data
 					#puts body
 				}
 				

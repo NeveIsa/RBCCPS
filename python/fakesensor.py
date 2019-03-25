@@ -41,7 +41,7 @@ if __name__=="__main__":
 		return TEMP_COUNT
 
 	d=mwpacket.datapacket("name","type","unit",extract=True)
-
+        mid=0
 	while True:
 		temperature = 100 #read_from_imaginary_thermometer()
                 pack=['{"timestamp":"%s","deviceid":"test","temperature":%s}'%(datetime.datetime.utcnow().isoformat(),temperature+i) for i in range(5)]
@@ -50,5 +50,6 @@ if __name__=="__main__":
 		#print packs[0]
 		#continue
                 import json
+                packs[0]["deviceid"]="name%s" % (mid%2)
 		(rc, mid) = mwpub(json.dumps(packs[0]))
 		time.sleep(delay)

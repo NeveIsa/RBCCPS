@@ -17,8 +17,8 @@ ES_INDEX_PREFIX=_CONF["es_index_prefix"]
 # Also use YYYY-MM-DD format as helloworld-2018* will give for whole year,
 # helloworld-2018-01* will give for Jan 2018 , etc and is easy and light on elastic than the format DD-MM-YYYY
 
-#ES_INDEX_DATE_POSTFIX=lambda:datetime.now().strftime("%Y-%m-%d")
-ES_INDEX_DATE_POSTFIX=lambda :"test"
+ES_INDEX_DATE_POSTFIX=lambda:datetime.now().strftime("%Y-%m-%d")
+#ES_INDEX_DATE_POSTFIX=lambda :"test"
 DOC_TYPE="middlewaredata"
 es = Elasticsearch(ES_HOST,maxsize=POOL_SIZE)
 
