@@ -1,0 +1,5 @@
+faraday
+json
+mqtt
+awesome_print
+norikra-client

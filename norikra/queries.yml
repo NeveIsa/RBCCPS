@@ -1,0 +1,2 @@
+- hello0: select data.temperature * data.temperature from name0.win:time_batch(5 sec,"FORCE_UPDATE, START_EAGER")
+- hello1: select data.temperature * data.temperature from name1.win:time_batch(5 sec,"FORCE_UPDATE, START_EAGER")
