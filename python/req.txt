@@ -2,4 +2,4 @@
 requests
 gevent
 elasticsearch
-
+paho-mqtt
