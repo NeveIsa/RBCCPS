@@ -75,6 +75,10 @@ def extract_sensor_data(message)
 	msg=JSON.load(message)
 	devID = msg['deviceid']
 	ts = msg['timestamp']
+	ts = ts + " UTC"
+	msec = (Time.parse(ts).to_f * 1000).to_i
+	msg["msecEpoch"] = msec
+	#ap msg
 	return devID,ts,msg
 end
 
@@ -131,6 +135,7 @@ MQTT::Client.connect('localhost') do |c|
     #puts "#{topic}: #{message}"
 	  
     device,timestamp,msgjson = extract_sensor_data(message)
+    #ap msgjson
     buffer_insert(device,msgjson)
     
     sort_buffer

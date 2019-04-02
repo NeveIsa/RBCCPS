@@ -1,2 +1,1 @@
-- hello0: select data.temperature * data.temperature as X from name0.win:time_batch(5 sec,"FORCE_UPDATE, START_EAGER")
-- hello1: select data.temperature * data.temperature as Y from name1.win:time_batch(5 sec,"FORCE_UPDATE, START_EAGER")
+- hello1: select timestamp from  pickandplace2_vibration.win:time_batch(5sec,"FORCE_UPDATE, START_EAGER")

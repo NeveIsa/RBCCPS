@@ -7,6 +7,7 @@ import time
 import sys
 import random
 from tools import mwpacket
+import json
 
 def on_publish(client, userdata, mid):
     print("mid: "+str(mid))
@@ -39,7 +40,10 @@ if __name__=="__main__":
 		TEMP_COUNT+=1
 		return int(random.random()*100)
 		return TEMP_COUNT
+        
 
+
+        imu_sensor_data = json.loads(open("imu_sensor.json").read())
 	d=mwpacket.datapacket("name","type","unit",extract=True)
         mid=0
 	while True:
@@ -51,5 +55,7 @@ if __name__=="__main__":
 		#continue
                 import json
                 packs[0]["deviceid"]="name%s" % (mid%2)
-		(rc, mid) = mwpub(json.dumps(packs[0]))
+		#(rc, mid) = mwpub(json.dumps(packs[0]))
+                imu_sensor_data["timestamp"]=datetime.datetime.now().isoformat()
+                (rc,mid) = mwpub(json.dumps(imu_sensor_data))
 		time.sleep(delay)
