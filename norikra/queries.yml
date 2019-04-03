@@ -1,2 +1,1 @@
-- hello1: select msecEpoch from  pickandplace2_vibration.win:time_batch(msecEpoch,5sec,"FORCE_UPDATE, START_EAGER")
-- hello1: select avg(msecEpoch) from  pickandplace2_vibration.win:ext_timed_batch(msecEpoch,5sec)
+- LDRvbr: select stddev(Math.pow(data.ax*data.ax + data.az*data.az,0.5))>0.01 as LDRVBRMAG from  loader_vibration.win:ext_timed_batch(msecEpoch,2sec)

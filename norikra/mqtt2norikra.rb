@@ -93,7 +93,7 @@ end
 
 
 
-TIME_DELTA_THRESHOLD = 5 #seconds
+TIME_DELTA_THRESHOLD = 1 #seconds
 def post_buffer
 	for device in BUFFER.keys
 		# check if data exists for device
@@ -131,7 +131,8 @@ puts "\n---> Subscribing to MQTT topic #{CONF['mqttTopic']}\n"
 # Subscribe example
 MQTT::Client.connect('localhost') do |c|
   # If you pass a block to the get method, then it will loop
-  c.get(CONF['mqttTopic']) do |topic,message|
+  #c.get(CONF['mqttTopic']) do |topic,message|
+  c.get('#') do |topic,message|
     #puts "#{topic}: #{message}"
 	  
     device,timestamp,msgjson = extract_sensor_data(message)
