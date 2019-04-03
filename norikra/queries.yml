@@ -1,2 +1,2 @@
-- hello1: select msecEpoch from  pickandplace2_vibration.win:ext_timed_batch(msecEpoch,5sec,"FORCE_UPDATE, START_EAGER")
+- hello1: select msecEpoch from  pickandplace2_vibration.win:time_batch(msecEpoch,5sec,"FORCE_UPDATE, START_EAGER")
 - hello1: select avg(msecEpoch) from  pickandplace2_vibration.win:ext_timed_batch(msecEpoch,5sec)

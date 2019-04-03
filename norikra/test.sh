@@ -1,4 +1,8 @@
-pkill screen
+screen -S norikraServer -X quit
+screen -S fakesensor -X quit
+screen -S mqtt2norikra -X quit
+
+
 
 echo "Starting norikra..."
 ./norikra_start.sh
