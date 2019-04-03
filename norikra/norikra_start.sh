@@ -1,1 +1,1 @@
-screen -S norikraServer norikra start
+screen -dmS norikraServer norikra start

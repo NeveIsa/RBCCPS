@@ -111,7 +111,7 @@ def post_buffer
 			delta = now - oldest_entry_utc
 			print "\r"," "*12,"\r"
 			print delta
-			if delta > TIME_DELTA_THRESHOLD 
+			if delta > TIME_DELTA_THRESHOLD || delta < 0 
 				#puts	
 				Thread.new(device,BUFFER[device]) { |dev,data| 
 					status,body=post dev,data
