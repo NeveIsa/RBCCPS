@@ -1,5 +1,6 @@
 require('norikra-client')
 require('yaml')
+require('time')
 
 trap "SIGINT" do
         puts "Exiting..."
@@ -35,6 +36,11 @@ queries= getAllQueryNames
 while true
 	sleep 1
 	queries.each { |q|
-		puts $nkclient.event(q).to_s
+		events = $nkclient.event(q)
+		events.each { |e|
+			ts,namedevent = e[0],e[1]
+			puts "%s - %s" % [Time.at(ts),namedevent]
+		}
+		
 	}
 end
