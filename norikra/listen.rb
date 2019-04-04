@@ -39,7 +39,9 @@ while true
 		events = $nkclient.event(q)
 		events.each { |e|
 			ts,namedevent = e[0],e[1]
-			puts "%s - %s" % [Time.at(ts),namedevent]
+			if namedevent["LOADER_EVENT"]
+				puts "%s - %s" % [Time.at(ts),namedevent]
+			end
 		}
 		
 	}
