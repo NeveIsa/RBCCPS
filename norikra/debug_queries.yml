@@ -1,0 +1,2 @@
+- LDRvbr: select stddev(Math.pow(data.ax*data.ax + data.az*data.az,0.5)) as LOADER_EVENT from loader_vibration.win:ext_timed_batch(msecEpoch,5sec)
+- SPRcrt: select max(data.A1) as SP_CLEAN_EVENT from screenprinter_plus_vaf.win:ext_timed_batch(msecEpoch,5sec)

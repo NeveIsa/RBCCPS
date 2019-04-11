@@ -1,20 +1,13 @@
 require('norikra-client')
 require('yaml')
 
-
-
 trap "SIGINT" do
 	puts "Exiting..."
 	exit 130
 end
 
-
-
 conf = File.read('conf.yml')
 CONF=YAML.load(conf)
-
-
-
 
 $nkclient = Norikra::Client.new(
     CONF['norikraHost'],
@@ -32,8 +25,6 @@ def removeAllQueries
 	}
 end
 
-
-
 ### JUST FOR TEST ###
 
 def registerCountQuery
@@ -48,8 +39,8 @@ end
 
 ### JUST FOR TEST ###
 
-def registerYAMLQueries
-	rawyaml = File.read('queries.yml')
+def registerYAMLQueries(filename)
+	rawyaml = File.read(filename)
 	queries = YAML.load(rawyaml)
 
 	queries.each { |queryhash|
@@ -64,5 +55,5 @@ removeAllQueries
 
 if ARGV.length!=0
 	#registerCountQuery
-	registerYAMLQueries
+	registerYAMLQueries ARGV[0]
 end

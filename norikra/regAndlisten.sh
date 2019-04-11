@@ -1,2 +1,2 @@
-ruby registerQueries.rb ok
+ruby registerQueries.rb queries.yml
 ruby listen.rb
