@@ -42,6 +42,7 @@ while true
 			ist=Time.at(ts)
 			#if namedevent[namedevent.keys[0]]
 				puts "%s - %s" % [ist,namedevent]
+				system("mosquitto_pub -t liveEvents -m #{namedevent}")
 			#end
 		}
 		
