@@ -1,4 +1,4 @@
-eshost: 10.10.10.1
+eshost: localhost
 esport: 9200
 esindex: annotation 
 
