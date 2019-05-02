@@ -1,0 +1,12 @@
+eshost: 10.10.10.1
+esport: 9200
+esindex: annotation 
+
+events:
+        1: ldr_refill
+        2: sp_refill
+        3: pp1_refill
+        4: pp2_refill
+        5: line_break
+        6: line_resume
+        7: sp_manualfeed
