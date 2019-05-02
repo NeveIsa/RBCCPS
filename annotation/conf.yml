@@ -1,8 +1,9 @@
-eshost: localhost
+eshost: 10.10.10.1
 esport: 9200
 esindex: annotation 
 
 events:
+        0: other
         1: ldr_refill
         2: sp_refill
         3: pp1_refill

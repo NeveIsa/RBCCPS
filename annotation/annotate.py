@@ -30,7 +30,11 @@ def askevent():
     if not key in EVENTS.keys():
         print("----------------------> key not found.\n")
         return None
-    event=EVENTS[int(key)]
+    event=EVENTS[key]
+    if key==0:
+        print("Enter event description",end=": ")
+        description=input()
+        event+=": " +description
     #print("---> Logging:",event)
     return event
 
@@ -38,11 +42,21 @@ def askevent():
 def sendevent(e):
     now=datetime.datetime.utcnow().isoformat()
     payload={'event':e,'timestamp':now}
+    with open("events.csv",'a') as g:
+        g.write("%s,%s\n" % (now,e))
     print("---> logging: {} | {}\n".format(e,now))
     requests.post(URL,json=payload)
 
 
 if __name__=="__main__":
+    import os
+
+    if not os.path.exists("events.csv"):
+        print("---> creating events.csv")
+        os.system("echo timestamp,event > events.csv" )
+    
+    
+    
     import sys
     if len(sys.argv) > 1:
         if sys.argv[1]=='test':
@@ -52,5 +66,5 @@ if __name__=="__main__":
         while True:
             listevents()
             ev=askevent()
-            if ev: sendevent(ev)
+            if not ev==None: sendevent(ev)
 
