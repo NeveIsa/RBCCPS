@@ -15,16 +15,23 @@
 
 ### Consuming the API is straight forward as listed below	
 
+### List users
 #### GET	
 * 	"/users"
 * 	"/acls"
-#### POST	
+
+### Add new users
+#### GET	
 * 	"/user/{username}/{password}"
 * 	"/acl/{username}/{topic}/{access(read/write/readwrite)}"
+
+### Delete users
 #### DELETE	
 * 	"/user/{username}"
 * 	"/acls/{username}/{topic}"
-#### PUT	
+
+### Reload new configuration
+#### GET	
 * 	"/sighup"
 
 

@@ -58,9 +58,9 @@ get '/' do
 	
 	{
 		"GET"=>["/users","/acls"],
-		"POST"=>["/user/{username}/{password}","/acl/{username}/{topic}/{access(read/write/readwrite)}"],
+		"GET"=>["/user/{username}/{password}","/acl/{username}/{topic}/{access(read/write/readwrite)}"],
 		"DELETE"=>["/user/{username}","/acls/{username}/{topic}"],
-		"PUT"=>["/sighup"]
+		"GET"=>["/sighup"]
 	}.to_json
 end
 
@@ -69,7 +69,7 @@ get '/users' do
 	model.getUsers.to_json
 end
 
-post '/user/:username/:password' do |u,p|
+get '/user/:username/:password' do |u,p|
 	content_type :json
 	model.putUser(u,p).to_json	
 end
@@ -86,7 +86,7 @@ get '/acls' do
 	model.getAcls.to_json
 end
 
-post '/acl/:username/:topic/:access' do |u,t,a|
+get '/acl/:username/:topic/:access' do |u,t,a|
 	if a=="read" or a=="write" or a=="readwrite"
 		content_type :json
 		model.putAcls(u,t,a).to_json
@@ -101,7 +101,7 @@ delete '/acl/:username/:topic' do |u,t|
 end
 
 
-put '/sighup' do
+get '/sighup' do
 	if not File.file?("/var/run/mosquitto.pid")
 		errormsg="Mosquitto is probably not running yet... /var/run/mosquitto.pid was not found"
 		halt 200,errormsg
