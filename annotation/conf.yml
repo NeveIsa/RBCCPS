@@ -1,4 +1,4 @@
-eshost: 10.10.10.1
+eshost: localhost
 esport: 9200
 esindex: annotation 
 
@@ -8,6 +8,10 @@ events:
         2: sp_refill
         3: pp1_refill
         4: pp2_refill
-        5: line_break
-        6: line_resume
-        7: sp_manualfeed
+        5: sp_manualfeed
+        6: pp1_nozzleproblem
+        7: pp2_nozzleproblem
+        8: reflow_newprofile       
+        
+        9: line_stop
+        10: line_resume
