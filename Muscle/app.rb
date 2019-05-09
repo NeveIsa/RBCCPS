@@ -57,10 +57,10 @@ get '/' do
 	content_type :json
 	
 	{
-		"GET"=>["/users","/acls"],
-		"GET"=>["/user/{username}/{password}","/acl/{username}/{topic}/{access(read/write/readwrite)}"],
-		"DELETE"=>["/user/{username}","/acls/{username}/{topic}"],
-		"GET"=>["/sighup"]
+		"1-GET"=>["/users","/acls"],
+		"2-GET"=>["/user/{username}/{password}","/acl/{username}/{topic}/{access(read/write/readwrite)}"],
+		"3-DELETE"=>["/user/{username}","/acls/{username}/{topic}"],
+		"4-GET"=>["/sighup"]
 	}.to_json
 end
 
