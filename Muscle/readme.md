@@ -15,7 +15,7 @@
 
 ### Consuming the API is straight forward as listed below	
 
-### List users
+### List users/ACL
 #### GET	
 * 	"/users"
 * 	"/acls"
